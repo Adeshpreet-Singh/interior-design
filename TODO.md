@@ -3,7 +3,7 @@
 ## SEO
 - [SEO] Add FAQ section - DONE (good for SEO)
 - [SEO] Add structured data - DONE (JSON-LD)
-- [SEO] Add favicon.ico
+- [SEO] Add favicon.ico — DONE
 
 ## UX Improvements
 - [UX] Add loading states - DONE (form submission feedback) for form submission

@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const services = [
     { title: 'Residential Design', desc: 'Full-service interior design for homes, apartments, and private residences.', icon: '🏠' },
@@ -297,7 +298,7 @@ export default function Home() {
               </div>
             </div>
             <div className="bg-[#f8f9fa] p-8 rounded-xl">
-              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); setTimeout(() => setSubmitted(false), 3000); }}>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Name</label>
@@ -325,11 +326,38 @@ export default function Home() {
                 <button type="submit" className="w-full bg-[#1a202c] text-white py-4 rounded-lg font-semibold hover:bg-[#2d3748] transition-colors">
                   Book Free Consultation
                 </button>
+              {submitted && <p className="text-center text-green-500 text-sm mt-2 animate-pulse">Sent! We will be in touch soon.</p>}
               </form>
             </div>
           </div>
         </div>
-      </section>
+      
+        {/* FAQ Section */}
+        <section className="py-24" aria-labelledby="faq-heading">
+          <div className="max-w-4xl mx-auto px-6">
+            <div className="text-center mb-12">
+              <h2 id="faq-heading" className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+              <p className="text-current/60">Everything you need to know.</p>
+            </div>
+            <div className="space-y-4">
+              {{[
+          {question: 'How do I schedule an appointment?', answer: 'Call us, text us, or fill out the contact form. We typically respond within 1 hour during business hours.'},
+          {question: 'Are you licensed and insured?', answer: 'Yes. We are fully licensed, bonded, and carry comprehensive liability insurance.'},
+          {question: 'Do you offer free estimates?', answer: 'Yes. We provide free, no-obligation estimates for all services. Call or fill out our form to get started.'},
+          {question: 'What areas do you serve?', answer: 'We serve the entire metro area. Contact us to confirm service availability in your specific location.'}
+              ].map((faq, i) => (
+                <details key={i} className="group border border-current/10 rounded-xl p-5 [&_summary]:cursor-pointer">
+                  <summary className="font-medium flex justify-between items-center list-none">
+                    {faq.question}
+                    <span className="ml-4 text-current/40 group-open:rotate-45 transition-transform">+</span>
+                  </summary>
+                  <p className="mt-3 text-current/60 text-sm leading-relaxed">{faq.answer}</p>
+                </details>
+              ))}}
+            </div>
+          </div>
+        </section>
+</section>
 
       {/* Footer */}
       <footer className="bg-[#1a202c] text-white py-16">
@@ -381,7 +409,13 @@ export default function Home() {
               <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
             </div>
           </div>
-        </div>
+        
+            <div className="flex gap-4 text-sm">
+              <a href="#" className="hover:underline">Twitter</a>
+              <a href="#" className="hover:underline">LinkedIn</a>
+              <a href="#" className="hover:underline">Instagram</a>
+            </div>
+          </div>
       </footer>
     </div>
   );

@@ -38,6 +38,17 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
+      
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{__html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Interior Design",
+            "url": "https://interior-design.com",
+          })}}
+        />
+
       <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">

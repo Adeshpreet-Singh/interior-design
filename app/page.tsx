@@ -76,18 +76,9 @@ feel like you.
               </div>
             </div>
             <div className="mt-16 grid grid-cols-3 gap-8 max-w-lg">
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-emerald-300">200+</div>
-              <div className="text-sm text-emerald-300 mt-1">Projects</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-emerald-300">10</div>
-              <div className="text-sm text-emerald-300 mt-1">Design awards</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-emerald-300">ASID</div>
-              <div className="text-sm text-emerald-300 mt-1">Member</div>
-            </div>
+            <div className="text-center"><div className="text-3xl md:text-4xl font-bold text-emerald-300">200+</div><div className="text-sm text-emerald-300 mt-1">Projects</div></div>
+            <div className="text-center"><div className="text-3xl md:text-4xl font-bold text-emerald-300">10</div><div className="text-sm text-emerald-300 mt-1">Design awards</div></div>
+            <div className="text-center"><div className="text-3xl md:text-4xl font-bold text-emerald-300">ASID</div><div className="text-sm text-emerald-300 mt-1">Member</div></div>
             </div>
           </div>
         </section>
@@ -99,36 +90,30 @@ feel like you.
               <h2 id="services-heading" className="text-4xl md:text-5xl font-bold">Our Services</h2>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <article className="bg-emerald-900 border border-emerald-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 group">
-              <div className="text-4xl mb-4" aria-hidden="true">🎨</div>
+            <article className="bg-emerald-900 border border-emerald-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300">
+              <div className="text-4xl mb-4">🎨</div>
               <h3 className="text-xl font-bold mb-3 text-emerald-50">Full Room Design</h3>
-              <p className="text-emerald-300 leading-relaxed">Concept to installation.</p>
-            </article>
-            <article className="bg-emerald-900 border border-emerald-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 group">
-              <div className="text-4xl mb-4" aria-hidden="true">🔨</div>
+              <p className="text-emerald-300 leading-relaxed">Concept to installation.</p></article>
+            <article className="bg-emerald-900 border border-emerald-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300">
+              <div className="text-4xl mb-4">🔨</div>
               <h3 className="text-xl font-bold mb-3 text-emerald-50">Renovation</h3>
-              <p className="text-emerald-300 leading-relaxed">Kitchen and bath design.</p>
-            </article>
-            <article className="bg-emerald-900 border border-emerald-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 group">
-              <div className="text-4xl mb-4" aria-hidden="true">🛋️</div>
+              <p className="text-emerald-300 leading-relaxed">Kitchen and bath design.</p></article>
+            <article className="bg-emerald-900 border border-emerald-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300">
+              <div className="text-4xl mb-4">🛋️</div>
               <h3 className="text-xl font-bold mb-3 text-emerald-50">Furniture</h3>
-              <p className="text-emerald-300 leading-relaxed">Custom and curated pieces.</p>
-            </article>
-            <article className="bg-emerald-900 border border-emerald-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 group">
-              <div className="text-4xl mb-4" aria-hidden="true">💡</div>
+              <p className="text-emerald-300 leading-relaxed">Custom and curated pieces.</p></article>
+            <article className="bg-emerald-900 border border-emerald-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300">
+              <div className="text-4xl mb-4">💡</div>
               <h3 className="text-xl font-bold mb-3 text-emerald-50">Lighting</h3>
-              <p className="text-emerald-300 leading-relaxed">Design and specification.</p>
-            </article>
-            <article className="bg-emerald-900 border border-emerald-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 group">
-              <div className="text-4xl mb-4" aria-hidden="true">🏡</div>
+              <p className="text-emerald-300 leading-relaxed">Design and specification.</p></article>
+            <article className="bg-emerald-900 border border-emerald-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300">
+              <div className="text-4xl mb-4">🏡</div>
               <h3 className="text-xl font-bold mb-3 text-emerald-50">Staging</h3>
-              <p className="text-emerald-300 leading-relaxed">Home staging for sale.</p>
-            </article>
-            <article className="bg-emerald-900 border border-emerald-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 group">
-              <div className="text-4xl mb-4" aria-hidden="true">💬</div>
+              <p className="text-emerald-300 leading-relaxed">Home staging for sale.</p></article>
+            <article className="bg-emerald-900 border border-emerald-800 rounded-2xl p-8 hover:shadow-xl transition-all duration-300">
+              <div className="text-4xl mb-4">💬</div>
               <h3 className="text-xl font-bold mb-3 text-emerald-50">Consultation</h3>
-              <p className="text-emerald-300 leading-relaxed">Hourly design advice.</p>
-            </article>
+              <p className="text-emerald-300 leading-relaxed">Hourly design advice.</p></article>
             </div>
           </div>
         </section>
@@ -142,28 +127,16 @@ feel like you.
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-emerald-900 border border-emerald-800 rounded-2xl p-6 text-center">
               <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-emerald-300/20 flex items-center justify-center text-2xl font-bold text-emerald-300">CD</div>
-              <h3 className="font-bold text-emerald-50">Claire Dubois</h3>
-              <p className="text-sm text-emerald-300">Principal Designer</p>
-              <p className="text-sm text-emerald-300 mt-1">ASID certified</p>
-            </div>
+              <h3 className="font-bold text-emerald-50">Claire Dubois</h3><p className="text-sm text-emerald-300">Principal Designer</p><p className="text-sm text-emerald-300 mt-1">ASID certified</p></div>
             <div className="bg-emerald-900 border border-emerald-800 rounded-2xl p-6 text-center">
               <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-emerald-300/20 flex items-center justify-center text-2xl font-bold text-emerald-300">AR</div>
-              <h3 className="font-bold text-emerald-50">Alex Rivera</h3>
-              <p className="text-sm text-emerald-300">Project Manager</p>
-              <p className="text-sm text-emerald-300 mt-1">LEED AP</p>
-            </div>
+              <h3 className="font-bold text-emerald-50">Alex Rivera</h3><p className="text-sm text-emerald-300">Project Manager</p><p className="text-sm text-emerald-300 mt-1">LEED AP</p></div>
             <div className="bg-emerald-900 border border-emerald-800 rounded-2xl p-6 text-center">
               <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-emerald-300/20 flex items-center justify-center text-2xl font-bold text-emerald-300">SK</div>
-              <h3 className="font-bold text-emerald-50">Sophie Kim</h3>
-              <p className="text-sm text-emerald-300">Designer</p>
-              <p className="text-sm text-emerald-300 mt-1">Parsons alum</p>
-            </div>
+              <h3 className="font-bold text-emerald-50">Sophie Kim</h3><p className="text-sm text-emerald-300">Designer</p><p className="text-sm text-emerald-300 mt-1">Parsons alum</p></div>
             <div className="bg-emerald-900 border border-emerald-800 rounded-2xl p-6 text-center">
               <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-emerald-300/20 flex items-center justify-center text-2xl font-bold text-emerald-300">CM</div>
-              <h3 className="font-bold text-emerald-50">Carlos Mendez</h3>
-              <p className="text-sm text-emerald-300">Procurement</p>
-              <p className="text-sm text-emerald-300 mt-1">Trade vendor network</p>
-            </div>
+              <h3 className="font-bold text-emerald-50">Carlos Mendez</h3><p className="text-sm text-emerald-300">Procurement</p><p className="text-sm text-emerald-300 mt-1">Trade vendor network</p></div>
             </div>
           </div>
         </section>
@@ -176,26 +149,14 @@ feel like you.
             </div>
             <div className="space-y-4">
             <details className="group border border-current/10 rounded-xl p-5 cursor-pointer">
-              <summary className="font-medium flex justify-between items-center list-none text-emerald-50">
-                Budget?
-                <span className="ml-4 text-emerald-300 group-open:rotate-45 transition-transform text-xl">+</span>
-              </summary>
-              <p className="mt-3 text-emerald-300 text-sm leading-relaxed">Projects start at $15K. We work within your budget.</p>
-            </details>
+              <summary className="font-medium flex justify-between items-center list-none text-emerald-50">Budget?<span className="ml-4 text-emerald-300 group-open:rotate-45 transition-transform text-xl">+</span></summary>
+              <p className="mt-3 text-emerald-300 text-sm leading-relaxed">Projects start at $15K. We work within your budget.</p></details>
             <details className="group border border-current/10 rounded-xl p-5 cursor-pointer">
-              <summary className="font-medium flex justify-between items-center list-none text-emerald-50">
-                Timeline?
-                <span className="ml-4 text-emerald-300 group-open:rotate-45 transition-transform text-xl">+</span>
-              </summary>
-              <p className="mt-3 text-emerald-300 text-sm leading-relaxed">4-12 weeks depending on scope.</p>
-            </details>
+              <summary className="font-medium flex justify-between items-center list-none text-emerald-50">Timeline?<span className="ml-4 text-emerald-300 group-open:rotate-45 transition-transform text-xl">+</span></summary>
+              <p className="mt-3 text-emerald-300 text-sm leading-relaxed">4-12 weeks depending on scope.</p></details>
             <details className="group border border-current/10 rounded-xl p-5 cursor-pointer">
-              <summary className="font-medium flex justify-between items-center list-none text-emerald-50">
-                Style?
-                <span className="ml-4 text-emerald-300 group-open:rotate-45 transition-transform text-xl">+</span>
-              </summary>
-              <p className="mt-3 text-emerald-300 text-sm leading-relaxed">We work in all styles: modern, traditional, eclectic.</p>
-            </details>
+              <summary className="font-medium flex justify-between items-center list-none text-emerald-50">Style?<span className="ml-4 text-emerald-300 group-open:rotate-45 transition-transform text-xl">+</span></summary>
+              <p className="mt-3 text-emerald-300 text-sm leading-relaxed">We work in all styles: modern, traditional, eclectic.</p></details>
             </div>
           </div>
         </section>
@@ -207,18 +168,9 @@ feel like you.
                 <p className="text-emerald-300 text-sm tracking-widest uppercase mb-3">Get In Touch</p>
                 <h2 id="contact-heading" className="text-4xl md:text-5xl font-bold mb-6">Book Consultation</h2>
                 <div className="space-y-6 text-emerald-300">
-                  <div>
-                    <div className="font-bold text-emerald-50">Phone</div>
-                    <a href="tel:(555) 123-4569" className="hover:text-emerald-300 transition-colors">(555) 123-4569</a>
-                  </div>
-                  <div>
-                    <div className="font-bold text-emerald-50">Address</div>
-                    <p className="whitespace-pre-line">300 Design District, Miami, FL</p>
-                  </div>
-                  <div>
-                    <div className="font-bold text-emerald-50">Hours</div>
-                    <p>Mon–Fri 9 AM – 6 PM</p>
-                  </div>
+                  <div><div className="font-bold text-emerald-50">Phone</div><a href="tel:(555) 123-4569" className="hover:text-emerald-300">(555) 123-4569</a></div>
+                  <div><div className="font-bold text-emerald-50">Address</div><p>300 Design District, Miami, FL</p></div>
+                  <div><div className="font-bold text-emerald-50">Hours</div><p>Mon–Fri 9 AM – 6 PM</p></div>
                 </div>
               </div>
               <div>

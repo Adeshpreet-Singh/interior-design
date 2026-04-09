@@ -117,7 +117,7 @@ feel like you.</h2>
           <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16">
             <div>
               <h2 id="contact-heading" className="text-4xl font-bold mb-8">Let's work together.</h2>
-              <div className="text-emerald-300 space-y-4">                  <div><div className="font-bold">Phone</div><a href="tel:(555) 123-4569" class="text-emerald-300">(555) 123-4569</a></div>
+              <div className="text-emerald-300 space-y-4">                  <div><div className="font-bold">Phone</div><a href="tel:(555) 123-4569" className="text-emerald-300">(555) 123-4569</a></div>
                   <div><div className="font-bold">Address</div><p>300 Design District, Miami, FL</p></div>
                   <div><div className="font-bold">Hours</div><p>Mon–Fri 9 AM – 6 PM</p></div></div>
             </div>

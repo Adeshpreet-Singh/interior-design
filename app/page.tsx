@@ -33,7 +33,7 @@ export default function Home() {
             <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=600&q=80" alt="Interior" className="w-full h-96 object-cover" loading="lazy" />
           </div>
         </section>
-        <section id="portfolio" className="py-24 px-2" style={{ background: 'white' }}>
+        <section id="portfolio" className="reveal py-24 px-2" style={{ background: 'white' }}>
           <div className="max-w-6xl mx-auto">
             <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-50 px-6">Portfolio</p>
             <h2 className="heading-design text-4xl font-light mb-12 px-6">Selected Projects</h2>
@@ -47,7 +47,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section id="services" className="py-24 px-8">
+        <section id="services" className="reveal py-24 px-8">
           <div className="max-w-4xl mx-auto">
             <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-50">Services</p>
             <h2 className="heading-design text-4xl font-light mb-12">How We Work</h2>
@@ -61,7 +61,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section id="contact" className="py-24 px-8" style={{ background: 'var(--charcoal)', color: 'white' }}>
+        <section id="contact" className="reveal py-24 px-8" style={{ background: 'var(--charcoal)', color: 'white' }}>
           <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-16">
             <div>
               <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-50">Get Started</p>

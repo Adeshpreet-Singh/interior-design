@@ -1,5 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Karla:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
+:root { --charcoal: #2c2c2c; --cream: #f5f0e8; --terracotta: #c4704b; --sage: #87a96b; }
 html { scroll-behavior: smooth; }
-body { background: #052e16; color: #ecfdf5; font-family: system-ui, sans-serif; }
-:focus-visible { outline: 2px solid #34d399; outline-offset: 2px; }
+body { background: var(--cream); color: var(--charcoal); font-family: 'Karla', sans-serif; }
+.heading-design { font-family: 'Cormorant Garamond', serif; line-height: 1.1; }
+.portfolio-item { position: relative; overflow: hidden; aspect-ratio: 4/3; }
+.portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+.portfolio-item:hover img { transform: scale(1.05); }
+.portfolio-item .info { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem; background: linear-gradient(to top, rgba(44,44,44,0.9), transparent); color: white; opacity: 0; transition: opacity 0.4s; }
+.portfolio-item:hover .info { opacity: 1; }
+input, textarea, select { background: white !important; border: 1px solid #d4c9b8 !important; padding: 0.75rem 1rem; border-radius: 0; border-bottom: 2px solid #d4c9b8 !important; }
+input:focus, textarea:focus, select:focus { border-bottom-color: var(--charcoal) !important; outline: none; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; } }
+:focus-visible { outline: 2px solid var(--charcoal); outline-offset: 2px; }

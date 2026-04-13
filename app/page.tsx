@@ -165,7 +165,7 @@ export default function Home() {
           <h1 className="heading text-xl font-light" style={{ color: 'var(--terracotta)' }}>Atelier Interiors</h1>
           <p className="text-[9px] tracking-[0.3em] uppercase opacity-50">Interior Design · San Francisco</p>
         </div>
-        <div className="hidden md:flex gap-8 text-sm opacity-70">
+        <div className="hidden md:flex gap-8 text-sm font-medium" style={{ color: '#374151' }}>
           {['services', 'portfolio', 'process', 'philosophy', 'faq', 'contact'].map(s => (
             <button key={s} onClick={() => scrollTo(s)} className="capitalize">{s}</button>
           ))}

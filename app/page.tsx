@@ -165,12 +165,12 @@ export default function Home() {
           <h1 className="heading text-xl font-light" style={{ color: 'var(--terracotta)' }}>Atelier Interiors</h1>
           <p className="text-base tracking-[0.3em] uppercase opacity-80">Interior Design · San Francisco</p>
         </div>
-        <div className="hidden md:flex gap-8 text-base font-medium" style={{ color: '#374151' }}>
-          {['services', 'portfolio', 'process', 'philosophy', 'faq', 'contact'].map(s => (
-            <button key={s} onClick={() => scrollTo(s)} className="btn capitalize">{s}</button>
+        <div className="hidden md:flex gap-6 text-base font-medium" style={{ color: '#5f5f5f' }}>
+          {['services', 'portfolio', 'contact'].map(s => (
+            <button key={s} onClick={() => scrollTo(s)} className="capitalize" style={{ background: 'transparent', border: 'none', padding: '0.5rem 0', cursor: 'pointer', transition: 'color 0.2s', color: '#5f5f5f' }} onMouseOver={(e) => (e.target as HTMLElement).style.color = '#1a1a1a'} onMouseOut={(e) => (e.target as HTMLElement).style.color = '#5f5f5f'}>{s}</button>
           ))}
         </div>
-        <button onClick={() => scrollTo('contact')} className="btn btn text-base px-5 py-2">Book Consult</button>
+        <button onClick={() => scrollTo('contact')} className="btn text-base px-5 py-2">Book Consult</button>
       </nav>
 
       <main>
@@ -242,12 +242,12 @@ export default function Home() {
         {/* Design Process */}
         <section id="process" className="section-alt reveal py-24 px-8">
           <div className="max-w-4xl mx-auto">
-            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-80 text-center">How It Works</p>
-            <h2 className="heading text-4xl font-light mb-4 text-center">Our Design Process</h2>
-            <p className="text-center opacity-80 max-w-2xl mx-auto mb-16 leading-relaxed">A structured, transparent approach that keeps you informed and involved at every stage. No surprises, no guesswork.</p>
+            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-80">How It Works</p>
+            <h2 className="heading text-4xl font-light mb-4">Our Design Process</h2>
+            <p className="opacity-80 max-w-2xl mb-16 leading-relaxed">A structured, transparent approach that keeps you informed and involved at every stage. No surprises, no guesswork.</p>
             <div className="space-y-0">
               {process.map((p, i) => (
-                <div key={p.step} className="flex gap-8 items-start p-8 reveal" style={{ borderBottom: i < process.length - 1 ? '1px solid #d4c9b8' : 'none' }}>
+                <div key={p.step} className="flex gap-8 items-start p-8 reveal" style={{ borderBottom: i < process.length - 1 ? '1px solid #e5e5e5' : 'none' }}>
                   <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center heading text-xl font-light" style={{ background: 'var(--terracotta)', color: 'white' }}>
                     {p.step}
                   </div>
@@ -308,7 +308,7 @@ export default function Home() {
             <p className="text-center opacity-80 max-w-xl mx-auto mb-16 leading-relaxed">Answers to the questions we hear most often. If yours isn&apos;t here, we welcome your call.</p>
             <div className="space-y-0">
               {faqs.map((f, i) => (
-                <div key={i} className="border-b" style={{ borderColor: '#d4c9b8' }}>
+                <div key={i} className="border-b" style={{ borderColor: '#e5e5e5' }}>
                   <button className="btn w-full flex justify-between items-center py-5 text-left" onClick={() => setOpenFaq(openFaq === i ? null : i)} >
                     <span className="font-medium pr-4">{f.q}</span>
                     <span className="flex-shrink-0 text-lg opacity-90">{openFaq === i ? '−' : '+'}</span>

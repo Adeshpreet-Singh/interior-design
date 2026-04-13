@@ -271,7 +271,7 @@ export default function Home() {
                 <div key={t.name} className="card p-8 reveal">
                   <p className="text-sm opacity-70 leading-relaxed mb-6 italic">&ldquo;{t.quote}&rdquo;</p>
                   <p className="font-medium text-sm">{t.name}</p>
-                  <p className="text-xs opacity-40 mt-1">{t.project}</p>
+                  <p className="text-xs opacity-70 mt-1">{t.project}</p>
                 </div>
               ))}
             </div>
@@ -314,7 +314,7 @@ export default function Home() {
                     className="w-full flex justify-between items-center py-5 text-left"
                   >
                     <span className="font-medium pr-4">{f.q}</span>
-                    <span className="flex-shrink-0 text-lg opacity-40">{openFaq === i ? '−' : '+'}</span>
+                    <span className="flex-shrink-0 text-lg opacity-70">{openFaq === i ? '−' : '+'}</span>
                   </button>
                   {openFaq === i && (
                     <div className="pb-5">
@@ -378,7 +378,7 @@ export default function Home() {
                   </select>
                   <textarea rows={4} placeholder="Tell us about your project — what inspired you, what isn't working now, and what you envision..." className="w-full px-4 py-3 rounded" style={{ border: '1px solid #d4c9b8', background: 'white' }} />
                   <button type="submit" className="w-full py-3 font-medium rounded" style={{ background: 'var(--terracotta)', color: 'white' }}>Request Consultation</button>
-                  <p className="text-xs opacity-40 text-center">We respond within 48 hours. No spam, ever.</p>
+                  <p className="text-xs opacity-70 text-center">We respond within 48 hours. No spam, ever.</p>
                 </form>
               )}
             </div>
@@ -388,8 +388,8 @@ export default function Home() {
 
       <footer className="py-12 px-8 text-center" style={{ borderTop: '1px solid #d4c9b8' }}>
         <p className="heading text-lg font-light mb-2" style={{ color: 'var(--terracotta)' }}>Atelier Interiors</p>
-        <p className="text-xs opacity-40">580 California St, Suite 400, San Francisco, CA 94104</p>
-        <p className="text-xs opacity-40 mt-1">© {new Date().getFullYear()} Atelier Interiors. All rights reserved.</p>
+        <p className="text-xs opacity-70">580 California St, Suite 400, San Francisco, CA 94104</p>
+        <p className="text-xs opacity-70 mt-1">© {new Date().getFullYear()} Atelier Interiors. All rights reserved.</p>
       </footer>
     </div>
   );

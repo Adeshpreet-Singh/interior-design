@@ -167,10 +167,10 @@ export default function Home() {
         </div>
         <div className="hidden md:flex gap-6 text-base font-medium" style={{ color: '#5f5f5f' }}>
           {['services', 'portfolio', 'contact'].map(s => (
-            <button key={s} onClick={() => scrollTo(s)} className="capitalize" style={{ background: 'transparent', border: 'none', padding: '0.5rem 0', cursor: 'pointer', transition: 'color 0.2s', color: '#5f5f5f' }} onMouseOver={(e) => (e.target as HTMLElement).style.color = '#1a1a1a'} onMouseOut={(e) => (e.target as HTMLElement).style.color = '#5f5f5f'}>{s}</button>
+            <button style={{ cursor: "pointer" }} key={s} onClick={() => scrollTo(s)} className="capitalize" style={{ background: 'transparent', border: 'none', padding: '0.5rem 0', cursor: 'pointer', transition: 'color 0.2s', color: '#5f5f5f' }} onMouseOver={(e) => (e.target as HTMLElement).style.color = '#1a1a1a'} onMouseOut={(e) => (e.target as HTMLElement).style.color = '#5f5f5f'}>{s}</button>
           ))}
         </div>
-        <button onClick={() => scrollTo('contact')} className="btn text-base px-5 py-2">Book Consult</button>
+        <button style={{ cursor: "pointer" }} onClick={() => scrollTo('contact')} className="btn text-base px-5 py-2">Book Consult</button>
       </nav>
 
       <main>
@@ -178,7 +178,7 @@ export default function Home() {
         <section className="hero py-28 px-8">
           <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-xs tracking-[0.3em] uppercase mb-4 opacity-80">San Francisco · Since 2012</p>
+              <p className="text-sm tracking-[0.3em] uppercase mb-4 opacity-80">San Francisco · Since 2012</p>
               <h2 className="heading text-5xl md:text-6xl font-light mb-6 leading-tight">
                 Spaces that<br/><em style={{ color: 'var(--terracotta)' }}>tell your story.</em>
               </h2>
@@ -189,8 +189,8 @@ export default function Home() {
                 Our team of designers, architects, and project managers brings together diverse perspectives united by a single commitment: to create interiors that feel inevitable, as though they could not have been designed any other way. Whether you are renovating a Victorian in Pacific Heights, furnishing a SOMA loft, or launching a boutique hotel, we meet you where you are and take you somewhere extraordinary.
               </p>
               <div className="flex gap-4">
-                <button onClick={() => scrollTo('portfolio')} className="btn btn-outline px-8 py-3 font-medium">View Our Work</button>
-                <button onClick={() => scrollTo('contact')} className="btn btn px-8 py-3 font-medium">Start a Project</button>
+                <button style={{ cursor: "pointer" }} onClick={() => scrollTo('portfolio')} className="btn btn-outline px-8 py-3 font-medium">View Our Work</button>
+                <button style={{ cursor: "pointer" }} onClick={() => scrollTo('contact')} className="btn btn px-8 py-3 font-medium">Start a Project</button>
               </div>
             </div>
             <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=600&q=80" alt="Atelier Interiors — a thoughtfully designed living space" className="w-full h-96 object-cover img-hover" loading="lazy" />
@@ -200,7 +200,7 @@ export default function Home() {
         {/* Services */}
         <section id="services" className="section-alt reveal py-24 px-8">
           <div className="max-w-6xl mx-auto">
-            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-80 text-center">What We Do</p>
+            <p className="text-sm tracking-[0.3em] uppercase mb-3 opacity-80 text-center">What We Do</p>
             <h2 className="heading text-4xl font-light mb-4 text-center">Our Services</h2>
             <p className="text-center opacity-80 max-w-2xl mx-auto mb-16 leading-relaxed">Every project is unique, but our commitment to craft, communication, and client satisfaction is constant. Here is how we can help.</p>
             <div className="grid md:grid-cols-3 gap-8">
@@ -218,7 +218,7 @@ export default function Home() {
         {/* Portfolio */}
         <section id="portfolio" className="reveal py-24 px-8">
           <div className="max-w-6xl mx-auto">
-            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-80 text-center">Our Work</p>
+            <p className="text-sm tracking-[0.3em] uppercase mb-3 opacity-80 text-center">Our Work</p>
             <h2 className="heading text-4xl font-light mb-4 text-center">Selected Projects</h2>
             <p className="text-center opacity-80 max-w-2xl mx-auto mb-16 leading-relaxed">A curated selection of recent work spanning residential, commercial, and hospitality interiors across the Bay Area.</p>
             <div className="grid md:grid-cols-3 gap-6">
@@ -242,7 +242,7 @@ export default function Home() {
         {/* Design Process */}
         <section id="process" className="section-alt reveal py-24 px-8">
           <div className="max-w-4xl mx-auto">
-            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-80">How It Works</p>
+            <p className="text-sm tracking-[0.3em] uppercase mb-3 opacity-80">How It Works</p>
             <h2 className="heading text-4xl font-light mb-4">Our Design Process</h2>
             <p className="opacity-80 max-w-2xl mb-16 leading-relaxed">A structured, transparent approach that keeps you informed and involved at every stage. No surprises, no guesswork.</p>
             <div className="space-y-0">
@@ -264,14 +264,14 @@ export default function Home() {
         {/* Testimonials */}
         <section className="reveal py-24 px-8">
           <div className="max-w-4xl mx-auto">
-            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-80 text-center">Client Voices</p>
+            <p className="text-sm tracking-[0.3em] uppercase mb-3 opacity-80 text-center">Client Voices</p>
             <h2 className="heading text-4xl font-light mb-16 text-center">What Our Clients Say</h2>
             <div className="grid md:grid-cols-3 gap-8">
               {testimonials.map(t => (
                 <div key={t.name} className="card p-8 reveal">
                   <p className="text-sm opacity-90 leading-relaxed mb-6 italic">&ldquo;{t.quote}&rdquo;</p>
                   <p className="font-medium text-sm">{t.name}</p>
-                  <p className="text-xs opacity-90 mt-1">{t.project}</p>
+                  <p className="text-sm opacity-90 mt-1">{t.project}</p>
                 </div>
               ))}
             </div>
@@ -281,7 +281,7 @@ export default function Home() {
         {/* Design Philosophy */}
         <section id="philosophy" className="section-alt reveal py-24 px-8">
           <div className="max-w-4xl mx-auto">
-            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-80 text-center">Our Beliefs</p>
+            <p className="text-sm tracking-[0.3em] uppercase mb-3 opacity-80 text-center">Our Beliefs</p>
             <h2 className="heading text-4xl font-light mb-12 text-center">Design Philosophy</h2>
             <div className="grid md:grid-cols-2 gap-12">
               <div>
@@ -303,13 +303,13 @@ export default function Home() {
         {/* FAQ */}
         <section id="faq" className="reveal py-24 px-8">
           <div className="max-w-3xl mx-auto">
-            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-80 text-center">Questions</p>
+            <p className="text-sm tracking-[0.3em] uppercase mb-3 opacity-80 text-center">Questions</p>
             <h2 className="heading text-4xl font-light mb-4 text-center">Frequently Asked</h2>
             <p className="text-center opacity-80 max-w-xl mx-auto mb-16 leading-relaxed">Answers to the questions we hear most often. If yours isn&apos;t here, we welcome your call.</p>
             <div className="space-y-0">
               {faqs.map((f, i) => (
                 <div key={i} className="border-b" style={{ borderColor: '#e5e5e5' }}>
-                  <button className="btn w-full flex justify-between items-center py-5 text-left" onClick={() => setOpenFaq(openFaq === i ? null : i)} >
+                  <button style={{ cursor: "pointer" }} className="btn w-full flex justify-between items-center py-5 text-left" onClick={() => setOpenFaq(openFaq === i ? null : i)} >
                     <span className="font-medium pr-4">{f.q}</span>
                     <span className="flex-shrink-0 text-lg opacity-90">{openFaq === i ? '−' : '+'}</span>
                   </button>
@@ -328,7 +328,7 @@ export default function Home() {
         <section id="contact" className="reveal py-24 px-8" style={{ background: 'var(--charcoal)', color: 'white' }}>
           <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16">
             <div>
-              <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-80">Get Started</p>
+              <p className="text-sm tracking-[0.3em] uppercase mb-3 opacity-80">Get Started</p>
               <h2 className="heading text-4xl font-light mb-6">Book a Consultation</h2>
               <p className="opacity-85 leading-relaxed mb-6">
                 Every project begins with a conversation. Tell us about your space, your vision, and your timeline. Our initial consultation is a focused 2-hour session where we walk your space, discuss possibilities, and provide a written action plan. If we are the right fit, we will outline a clear path forward with transparent pricing and realistic timelines.
@@ -354,16 +354,16 @@ export default function Home() {
               ) : (
                 <form onSubmit={e => { e.preventDefault(); setSubmitted(true); }} className="space-y-4" style={{ color: 'var(--charcoal)' }}>
                   <div className="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="First name" required className="w-full px-4 py-3 rounded border border-gray-300 " style={{ border: '1px solid #d4c9b8', background: 'white' }} />
-                    <input type="text" placeholder="Last name" required className="w-full px-4 py-3 rounded border border-gray-300 " style={{ border: '1px solid #d4c9b8', background: 'white' }} />
+                    <input type="text" placeholder="First name" required className="w-full px-4 py-3 rounded border border-gray-300  border-2 border-current/20" style={{ border: '1px solid #d4c9b8', background: 'white' }} />
+                    <input type="text" placeholder="Last name" required className="w-full px-4 py-3 rounded border border-gray-300  border-2 border-current/20" style={{ border: '1px solid #d4c9b8', background: 'white' }} />
                   </div>
-                  <input type="email" placeholder="Email address" required className="w-full px-4 py-3 rounded border border-gray-300 " style={{ border: '1px solid #d4c9b8', background: 'white' }} />
-                  <input type="tel" placeholder="Phone number" className="w-full px-4 py-3 rounded border border-gray-300 " style={{ border: '1px solid #d4c9b8', background: 'white' }} />
+                  <input type="email" placeholder="Email address" required className="w-full px-4 py-3 rounded border border-gray-300  border-2 border-current/20" style={{ border: '1px solid #d4c9b8', background: 'white' }} />
+                  <input type="tel" placeholder="Phone number" className="w-full px-4 py-3 rounded border border-gray-300  border-2 border-current/20" style={{ border: '1px solid #d4c9b8', background: 'white' }} />
                   <select className="w-full px-4 py-3 rounded border border-gray-300 " style={{ border: '1px solid #d4c9b8', background: 'white' }}>
                     <option value="">Select a service</option>
                     {services.map(s => <option key={s.name}>{s.name}</option>)}
                   </select>
-                  <input type="text" placeholder="Project address or neighborhood" className="w-full px-4 py-3 rounded border border-gray-300 " style={{ border: '1px solid #d4c9b8', background: 'white' }} />
+                  <input type="text" placeholder="Project address or neighborhood" className="w-full px-4 py-3 rounded border border-gray-300  border-2 border-current/20" style={{ border: '1px solid #d4c9b8', background: 'white' }} />
                   <select className="w-full px-4 py-3 rounded border border-gray-300 " style={{ border: '1px solid #d4c9b8', background: 'white' }}>
                     <option value="">Estimated budget range</option>
                     <option>Under $25,000</option>
@@ -374,8 +374,8 @@ export default function Home() {
                     <option>Not sure yet</option>
                   </select>
                   <textarea rows={4} placeholder="Tell us about your project — what inspired you, what isn't working now, and what you envision..." className="w-full px-4 py-3 rounded border border-gray-300 " style={{ border: '1px solid #d4c9b8', background: 'white' }} />
-                  <button type="submit" className="w-full py-3 font-medium rounded" style={{ background: 'var(--terracotta)', color: 'white' }}>Request Consultation</button>
-                  <p className="text-xs opacity-90 text-center">We respond within 48 hours. No spam, ever.</p>
+                  <button style={{ cursor: "pointer" }} type="submit" className="w-full py-3 font-medium rounded" style={{ background: 'var(--terracotta)', color: 'white' }}>Request Consultation</button>
+                  <p className="text-sm opacity-90 text-center">We respond within 48 hours. No spam, ever.</p>
                 </form>
               )}
             </div>
@@ -385,8 +385,8 @@ export default function Home() {
 
       <footer className="py-12 px-8 text-center" style={{ borderTop: '1px solid #d4c9b8' }}>
         <p className="heading text-lg font-light mb-2" style={{ color: 'var(--terracotta)' }}>Atelier Interiors</p>
-        <p className="text-xs opacity-90">580 California St, Suite 400, San Francisco, CA 94104</p>
-        <p className="text-xs opacity-90 mt-1">© {new Date().getFullYear()} Atelier Interiors. All rights reserved.</p>
+        <p className="text-sm opacity-90">580 California St, Suite 400, San Francisco, CA 94104</p>
+        <p className="text-sm opacity-90 mt-1">© {new Date().getFullYear()} Atelier Interiors. All rights reserved.</p>
       </footer>
     </div>
   );

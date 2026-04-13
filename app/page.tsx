@@ -167,10 +167,10 @@ export default function Home() {
         </div>
         <div className="hidden md:flex gap-8 text-base font-medium" style={{ color: '#374151' }}>
           {['services', 'portfolio', 'process', 'philosophy', 'faq', 'contact'].map(s => (
-            <button className="btn" key={s} onClick={() => scrollTo(s)} className="capitalize">{s}</button>
+            <button key={s} onClick={() => scrollTo(s)} className="btn capitalize">{s}</button>
           ))}
         </div>
-        <button className="btn" onClick={() => scrollTo('contact')} className="btn text-base px-5 py-2">Book Consult</button>
+        <button onClick={() => scrollTo('contact')} className="btn btn text-base px-5 py-2">Book Consult</button>
       </nav>
 
       <main>
@@ -189,8 +189,8 @@ export default function Home() {
                 Our team of designers, architects, and project managers brings together diverse perspectives united by a single commitment: to create interiors that feel inevitable, as though they could not have been designed any other way. Whether you are renovating a Victorian in Pacific Heights, furnishing a SOMA loft, or launching a boutique hotel, we meet you where you are and take you somewhere extraordinary.
               </p>
               <div className="flex gap-4">
-                <button className="btn" onClick={() => scrollTo('portfolio')} className="btn-outline px-8 py-3 font-medium">View Our Work</button>
-                <button className="btn" onClick={() => scrollTo('contact')} className="btn px-8 py-3 font-medium">Start a Project</button>
+                <button onClick={() => scrollTo('portfolio')} className="btn btn-outline px-8 py-3 font-medium">View Our Work</button>
+                <button onClick={() => scrollTo('contact')} className="btn btn px-8 py-3 font-medium">Start a Project</button>
               </div>
             </div>
             <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=600&q=80" alt="Atelier Interiors — a thoughtfully designed living space" className="w-full h-96 object-cover img-hover" loading="lazy" />
@@ -309,10 +309,7 @@ export default function Home() {
             <div className="space-y-0">
               {faqs.map((f, i) => (
                 <div key={i} className="border-b" style={{ borderColor: '#d4c9b8' }}>
-                  <button className="btn"
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex justify-between items-center py-5 text-left"
-                  >
+                  <button className="btn w-full flex justify-between items-center py-5 text-left" onClick={() => setOpenFaq(openFaq === i ? null : i)} >
                     <span className="font-medium pr-4">{f.q}</span>
                     <span className="flex-shrink-0 text-lg opacity-90">{openFaq === i ? '−' : '+'}</span>
                   </button>

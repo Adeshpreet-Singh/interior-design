@@ -163,14 +163,14 @@ export default function Home() {
       <nav className="sticky top-0 z-50 px-8 py-4 flex justify-between items-center" style={{ background: '#f5f0e8ee', backdropFilter: 'blur(12px)', borderBottom: '1px solid #d4c9b8' }}>
         <div>
           <h1 className="heading text-xl font-light" style={{ color: 'var(--terracotta)' }}>Atelier Interiors</h1>
-          <p className="text-[9px] tracking-[0.3em] uppercase opacity-50">Interior Design · San Francisco</p>
+          <p className="text-base tracking-[0.3em] uppercase opacity-80">Interior Design · San Francisco</p>
         </div>
-        <div className="hidden md:flex gap-8 text-sm font-medium" style={{ color: '#374151' }}>
+        <div className="hidden md:flex gap-8 text-base font-medium" style={{ color: '#374151' }}>
           {['services', 'portfolio', 'process', 'philosophy', 'faq', 'contact'].map(s => (
-            <button key={s} onClick={() => scrollTo(s)} className="capitalize">{s}</button>
+            <button className="btn" key={s} onClick={() => scrollTo(s)} className="capitalize">{s}</button>
           ))}
         </div>
-        <button onClick={() => scrollTo('contact')} className="btn text-sm px-5 py-2">Book Consult</button>
+        <button className="btn" onClick={() => scrollTo('contact')} className="btn text-base px-5 py-2">Book Consult</button>
       </nav>
 
       <main>
@@ -178,19 +178,19 @@ export default function Home() {
         <section className="hero py-28 px-8">
           <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-xs tracking-[0.3em] uppercase mb-4 opacity-50">San Francisco · Since 2012</p>
+              <p className="text-xs tracking-[0.3em] uppercase mb-4 opacity-80">San Francisco · Since 2012</p>
               <h2 className="heading text-5xl md:text-6xl font-light mb-6 leading-tight">
                 Spaces that<br/><em style={{ color: 'var(--terracotta)' }}>tell your story.</em>
               </h2>
-              <p className="text-lg opacity-60 mb-8 leading-relaxed max-w-lg">
+              <p className="text-lg opacity-85 mb-8 leading-relaxed max-w-lg">
                 At Atelier Interiors, we believe every space has a narrative waiting to be told. For over a decade, we have been designing homes and commercial environments in San Francisco that are deeply personal, rigorously functional, and quietly beautiful. We don&apos;t follow trends — we listen to the people who will live in the spaces we create.
               </p>
-              <p className="text-base opacity-50 mb-8 leading-relaxed max-w-lg">
+              <p className="text-base opacity-80 mb-8 leading-relaxed max-w-lg">
                 Our team of designers, architects, and project managers brings together diverse perspectives united by a single commitment: to create interiors that feel inevitable, as though they could not have been designed any other way. Whether you are renovating a Victorian in Pacific Heights, furnishing a SOMA loft, or launching a boutique hotel, we meet you where you are and take you somewhere extraordinary.
               </p>
               <div className="flex gap-4">
-                <button onClick={() => scrollTo('portfolio')} className="btn-outline px-8 py-3 font-medium">View Our Work</button>
-                <button onClick={() => scrollTo('contact')} className="btn px-8 py-3 font-medium">Start a Project</button>
+                <button className="btn" onClick={() => scrollTo('portfolio')} className="btn-outline px-8 py-3 font-medium">View Our Work</button>
+                <button className="btn" onClick={() => scrollTo('contact')} className="btn px-8 py-3 font-medium">Start a Project</button>
               </div>
             </div>
             <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=600&q=80" alt="Atelier Interiors — a thoughtfully designed living space" className="w-full h-96 object-cover img-hover" loading="lazy" />
@@ -200,15 +200,15 @@ export default function Home() {
         {/* Services */}
         <section id="services" className="section-alt reveal py-24 px-8">
           <div className="max-w-6xl mx-auto">
-            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-50 text-center">What We Do</p>
+            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-80 text-center">What We Do</p>
             <h2 className="heading text-4xl font-light mb-4 text-center">Our Services</h2>
-            <p className="text-center opacity-50 max-w-2xl mx-auto mb-16 leading-relaxed">Every project is unique, but our commitment to craft, communication, and client satisfaction is constant. Here is how we can help.</p>
+            <p className="text-center opacity-80 max-w-2xl mx-auto mb-16 leading-relaxed">Every project is unique, but our commitment to craft, communication, and client satisfaction is constant. Here is how we can help.</p>
             <div className="grid md:grid-cols-3 gap-8">
               {services.map(s => (
                 <div key={s.name} className="card p-8 reveal">
                   <span className="text-3xl mb-4 block">{s.icon}</span>
                   <h3 className="font-medium text-lg mb-3">{s.name}</h3>
-                  <p className="text-sm opacity-60 leading-relaxed">{s.desc}</p>
+                  <p className="text-sm opacity-85 leading-relaxed">{s.desc}</p>
                 </div>
               ))}
             </div>
@@ -218,9 +218,9 @@ export default function Home() {
         {/* Portfolio */}
         <section id="portfolio" className="reveal py-24 px-8">
           <div className="max-w-6xl mx-auto">
-            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-50 text-center">Our Work</p>
+            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-80 text-center">Our Work</p>
             <h2 className="heading text-4xl font-light mb-4 text-center">Selected Projects</h2>
-            <p className="text-center opacity-50 max-w-2xl mx-auto mb-16 leading-relaxed">A curated selection of recent work spanning residential, commercial, and hospitality interiors across the Bay Area.</p>
+            <p className="text-center opacity-80 max-w-2xl mx-auto mb-16 leading-relaxed">A curated selection of recent work spanning residential, commercial, and hospitality interiors across the Bay Area.</p>
             <div className="grid md:grid-cols-3 gap-6">
               {portfolio.map(p => (
                 <div key={p.name} className="card overflow-hidden img-hover reveal">
@@ -231,7 +231,7 @@ export default function Home() {
                       <span className="badge">{p.style}</span>
                     </div>
                     <h3 className="font-medium text-lg mb-2">{p.name}</h3>
-                    <p className="text-sm opacity-60 leading-relaxed">{p.desc}</p>
+                    <p className="text-sm opacity-85 leading-relaxed">{p.desc}</p>
                   </div>
                 </div>
               ))}
@@ -242,9 +242,9 @@ export default function Home() {
         {/* Design Process */}
         <section id="process" className="section-alt reveal py-24 px-8">
           <div className="max-w-4xl mx-auto">
-            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-50 text-center">How It Works</p>
+            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-80 text-center">How It Works</p>
             <h2 className="heading text-4xl font-light mb-4 text-center">Our Design Process</h2>
-            <p className="text-center opacity-50 max-w-2xl mx-auto mb-16 leading-relaxed">A structured, transparent approach that keeps you informed and involved at every stage. No surprises, no guesswork.</p>
+            <p className="text-center opacity-80 max-w-2xl mx-auto mb-16 leading-relaxed">A structured, transparent approach that keeps you informed and involved at every stage. No surprises, no guesswork.</p>
             <div className="space-y-0">
               {process.map((p, i) => (
                 <div key={p.step} className="flex gap-8 items-start p-8 reveal" style={{ borderBottom: i < process.length - 1 ? '1px solid #d4c9b8' : 'none' }}>
@@ -253,7 +253,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="font-medium text-lg mb-2">{p.title}</h3>
-                    <p className="text-sm opacity-60 leading-relaxed">{p.desc}</p>
+                    <p className="text-sm opacity-85 leading-relaxed">{p.desc}</p>
                   </div>
                 </div>
               ))}
@@ -264,14 +264,14 @@ export default function Home() {
         {/* Testimonials */}
         <section className="reveal py-24 px-8">
           <div className="max-w-4xl mx-auto">
-            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-50 text-center">Client Voices</p>
+            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-80 text-center">Client Voices</p>
             <h2 className="heading text-4xl font-light mb-16 text-center">What Our Clients Say</h2>
             <div className="grid md:grid-cols-3 gap-8">
               {testimonials.map(t => (
                 <div key={t.name} className="card p-8 reveal">
-                  <p className="text-sm opacity-70 leading-relaxed mb-6 italic">&ldquo;{t.quote}&rdquo;</p>
+                  <p className="text-sm opacity-90 leading-relaxed mb-6 italic">&ldquo;{t.quote}&rdquo;</p>
                   <p className="font-medium text-sm">{t.name}</p>
-                  <p className="text-xs opacity-70 mt-1">{t.project}</p>
+                  <p className="text-xs opacity-90 mt-1">{t.project}</p>
                 </div>
               ))}
             </div>
@@ -281,20 +281,20 @@ export default function Home() {
         {/* Design Philosophy */}
         <section id="philosophy" className="section-alt reveal py-24 px-8">
           <div className="max-w-4xl mx-auto">
-            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-50 text-center">Our Beliefs</p>
+            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-80 text-center">Our Beliefs</p>
             <h2 className="heading text-4xl font-light mb-12 text-center">Design Philosophy</h2>
             <div className="grid md:grid-cols-2 gap-12">
               <div>
                 <h3 className="font-medium text-lg mb-3">Form Follows Life</h3>
-                <p className="text-sm opacity-60 leading-relaxed mb-6">We reject the idea that beautiful spaces must sacrifice livability. Every design decision — from the height of a countertop to the placement of a light switch — is evaluated against how it serves daily life. A well-designed home should make ordinary moments feel effortless and exceptional moments feel possible.</p>
+                <p className="text-sm opacity-85 leading-relaxed mb-6">We reject the idea that beautiful spaces must sacrifice livability. Every design decision — from the height of a countertop to the placement of a light switch — is evaluated against how it serves daily life. A well-designed home should make ordinary moments feel effortless and exceptional moments feel possible.</p>
                 <h3 className="font-medium text-lg mb-3">Material Honesty</h3>
-                <p className="text-sm opacity-60 leading-relaxed">We choose materials for their inherent beauty, durability, and story. Real wood ages with character. Natural stone develops a patina. Linen softens with use. We believe spaces gain soul when their surfaces carry the honest marks of time, rather than the manufactured perfection of synthetic substitutes.</p>
+                <p className="text-sm opacity-85 leading-relaxed">We choose materials for their inherent beauty, durability, and story. Real wood ages with character. Natural stone develops a patina. Linen softens with use. We believe spaces gain soul when their surfaces carry the honest marks of time, rather than the manufactured perfection of synthetic substitutes.</p>
               </div>
               <div>
                 <h3 className="font-medium text-lg mb-3">Context Over Trends</h3>
-                <p className="text-sm opacity-60 leading-relaxed mb-6">A home in Noe Valley with two young children demands different solutions than a Pacific Heights pied-a-terre. We design for the specific light, climate, culture, and life stage of each client. Our portfolio is deliberately eclectic because our clients are. We are not building a brand aesthetic — we are building your home.</p>
+                <p className="text-sm opacity-85 leading-relaxed mb-6">A home in Noe Valley with two young children demands different solutions than a Pacific Heights pied-a-terre. We design for the specific light, climate, culture, and life stage of each client. Our portfolio is deliberately eclectic because our clients are. We are not building a brand aesthetic — we are building your home.</p>
                 <h3 className="font-medium text-lg mb-3">Sustainable by Default</h3>
-                <p className="text-sm opacity-60 leading-relaxed">Sustainability is not an add-on or a marketing angle — it is a design constraint that produces better results. We source locally when possible, specify low-VOC finishes, recommend energy-efficient systems, and design for longevity rather than disposability. A well-designed space that lasts thirty years is inherently more sustainable than a trendy one replaced every five.</p>
+                <p className="text-sm opacity-85 leading-relaxed">Sustainability is not an add-on or a marketing angle — it is a design constraint that produces better results. We source locally when possible, specify low-VOC finishes, recommend energy-efficient systems, and design for longevity rather than disposability. A well-designed space that lasts thirty years is inherently more sustainable than a trendy one replaced every five.</p>
               </div>
             </div>
           </div>
@@ -303,22 +303,22 @@ export default function Home() {
         {/* FAQ */}
         <section id="faq" className="reveal py-24 px-8">
           <div className="max-w-3xl mx-auto">
-            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-50 text-center">Questions</p>
+            <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-80 text-center">Questions</p>
             <h2 className="heading text-4xl font-light mb-4 text-center">Frequently Asked</h2>
-            <p className="text-center opacity-50 max-w-xl mx-auto mb-16 leading-relaxed">Answers to the questions we hear most often. If yours isn&apos;t here, we welcome your call.</p>
+            <p className="text-center opacity-80 max-w-xl mx-auto mb-16 leading-relaxed">Answers to the questions we hear most often. If yours isn&apos;t here, we welcome your call.</p>
             <div className="space-y-0">
               {faqs.map((f, i) => (
                 <div key={i} className="border-b" style={{ borderColor: '#d4c9b8' }}>
-                  <button
+                  <button className="btn"
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                     className="w-full flex justify-between items-center py-5 text-left"
                   >
                     <span className="font-medium pr-4">{f.q}</span>
-                    <span className="flex-shrink-0 text-lg opacity-70">{openFaq === i ? '−' : '+'}</span>
+                    <span className="flex-shrink-0 text-lg opacity-90">{openFaq === i ? '−' : '+'}</span>
                   </button>
                   {openFaq === i && (
                     <div className="pb-5">
-                      <p className="text-sm opacity-60 leading-relaxed">{f.a}</p>
+                      <p className="text-sm opacity-85 leading-relaxed">{f.a}</p>
                     </div>
                   )}
                 </div>
@@ -331,15 +331,15 @@ export default function Home() {
         <section id="contact" className="reveal py-24 px-8" style={{ background: 'var(--charcoal)', color: 'white' }}>
           <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16">
             <div>
-              <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-50">Get Started</p>
+              <p className="text-xs tracking-[0.3em] uppercase mb-3 opacity-80">Get Started</p>
               <h2 className="heading text-4xl font-light mb-6">Book a Consultation</h2>
-              <p className="opacity-60 leading-relaxed mb-6">
+              <p className="opacity-85 leading-relaxed mb-6">
                 Every project begins with a conversation. Tell us about your space, your vision, and your timeline. Our initial consultation is a focused 2-hour session where we walk your space, discuss possibilities, and provide a written action plan. If we are the right fit, we will outline a clear path forward with transparent pricing and realistic timelines.
               </p>
-              <p className="opacity-60 leading-relaxed mb-8">
+              <p className="opacity-85 leading-relaxed mb-8">
                 There is no obligation and no hard sell. We earn projects by demonstrating value, not by pressuring decisions. If your project is better served by another approach, we will tell you honestly.
               </p>
-              <div className="space-y-3 text-sm opacity-60">
+              <div className="space-y-3 text-sm opacity-85">
                 <p>📍 580 California St, Suite 400, San Francisco, CA 94104</p>
                 <p>📧 <a href="mailto:studio@atelierinteriors.com" className="underline" style={{ color: 'var(--terracotta)' }}>studio@atelierinteriors.com</a></p>
                 <p>📞 <a href="tel:(415) 555-0162" className="underline" style={{ color: 'var(--terracotta)' }}>(415) 555-0162</a></p>
@@ -351,23 +351,23 @@ export default function Home() {
                 <div className="h-full flex items-center">
                   <div>
                     <p className="heading text-2xl" style={{ color: 'var(--terracotta)' }}>Thank you.</p>
-                    <p className="opacity-60 text-sm mt-2">We will review your inquiry and respond within 48 hours. In the meantime, feel free to browse our portfolio for inspiration.</p>
+                    <p className="opacity-85 text-sm mt-2">We will review your inquiry and respond within 48 hours. In the meantime, feel free to browse our portfolio for inspiration.</p>
                   </div>
                 </div>
               ) : (
                 <form onSubmit={e => { e.preventDefault(); setSubmitted(true); }} className="space-y-4" style={{ color: 'var(--charcoal)' }}>
                   <div className="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="First name" required className="w-full px-4 py-3 rounded" style={{ border: '1px solid #d4c9b8', background: 'white' }} />
-                    <input type="text" placeholder="Last name" required className="w-full px-4 py-3 rounded" style={{ border: '1px solid #d4c9b8', background: 'white' }} />
+                    <input type="text" placeholder="First name" required className="w-full px-4 py-3 rounded border border-gray-300 " style={{ border: '1px solid #d4c9b8', background: 'white' }} />
+                    <input type="text" placeholder="Last name" required className="w-full px-4 py-3 rounded border border-gray-300 " style={{ border: '1px solid #d4c9b8', background: 'white' }} />
                   </div>
-                  <input type="email" placeholder="Email address" required className="w-full px-4 py-3 rounded" style={{ border: '1px solid #d4c9b8', background: 'white' }} />
-                  <input type="tel" placeholder="Phone number" className="w-full px-4 py-3 rounded" style={{ border: '1px solid #d4c9b8', background: 'white' }} />
-                  <select className="w-full px-4 py-3 rounded" style={{ border: '1px solid #d4c9b8', background: 'white' }}>
+                  <input type="email" placeholder="Email address" required className="w-full px-4 py-3 rounded border border-gray-300 " style={{ border: '1px solid #d4c9b8', background: 'white' }} />
+                  <input type="tel" placeholder="Phone number" className="w-full px-4 py-3 rounded border border-gray-300 " style={{ border: '1px solid #d4c9b8', background: 'white' }} />
+                  <select className="w-full px-4 py-3 rounded border border-gray-300 " style={{ border: '1px solid #d4c9b8', background: 'white' }}>
                     <option value="">Select a service</option>
                     {services.map(s => <option key={s.name}>{s.name}</option>)}
                   </select>
-                  <input type="text" placeholder="Project address or neighborhood" className="w-full px-4 py-3 rounded" style={{ border: '1px solid #d4c9b8', background: 'white' }} />
-                  <select className="w-full px-4 py-3 rounded" style={{ border: '1px solid #d4c9b8', background: 'white' }}>
+                  <input type="text" placeholder="Project address or neighborhood" className="w-full px-4 py-3 rounded border border-gray-300 " style={{ border: '1px solid #d4c9b8', background: 'white' }} />
+                  <select className="w-full px-4 py-3 rounded border border-gray-300 " style={{ border: '1px solid #d4c9b8', background: 'white' }}>
                     <option value="">Estimated budget range</option>
                     <option>Under $25,000</option>
                     <option>$25,000 – $50,000</option>
@@ -376,9 +376,9 @@ export default function Home() {
                     <option>$250,000+</option>
                     <option>Not sure yet</option>
                   </select>
-                  <textarea rows={4} placeholder="Tell us about your project — what inspired you, what isn't working now, and what you envision..." className="w-full px-4 py-3 rounded" style={{ border: '1px solid #d4c9b8', background: 'white' }} />
+                  <textarea rows={4} placeholder="Tell us about your project — what inspired you, what isn't working now, and what you envision..." className="w-full px-4 py-3 rounded border border-gray-300 " style={{ border: '1px solid #d4c9b8', background: 'white' }} />
                   <button type="submit" className="w-full py-3 font-medium rounded" style={{ background: 'var(--terracotta)', color: 'white' }}>Request Consultation</button>
-                  <p className="text-xs opacity-70 text-center">We respond within 48 hours. No spam, ever.</p>
+                  <p className="text-xs opacity-90 text-center">We respond within 48 hours. No spam, ever.</p>
                 </form>
               )}
             </div>
@@ -388,8 +388,8 @@ export default function Home() {
 
       <footer className="py-12 px-8 text-center" style={{ borderTop: '1px solid #d4c9b8' }}>
         <p className="heading text-lg font-light mb-2" style={{ color: 'var(--terracotta)' }}>Atelier Interiors</p>
-        <p className="text-xs opacity-70">580 California St, Suite 400, San Francisco, CA 94104</p>
-        <p className="text-xs opacity-70 mt-1">© {new Date().getFullYear()} Atelier Interiors. All rights reserved.</p>
+        <p className="text-xs opacity-90">580 California St, Suite 400, San Francisco, CA 94104</p>
+        <p className="text-xs opacity-90 mt-1">© {new Date().getFullYear()} Atelier Interiors. All rights reserved.</p>
       </footer>
     </div>
   );

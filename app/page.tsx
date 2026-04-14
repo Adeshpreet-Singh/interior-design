@@ -167,10 +167,10 @@ export default function Home() {
         </div>
         <div className="hidden md:flex gap-6 text-base font-medium" style={{ color: '#5f5f5f' }}>
           {['services', 'portfolio', 'contact'].map(s => (
-            <button style={{ cursor: "pointer" }} key={s} onClick={() => scrollTo(s)} className="capitalize" style={{ background: 'transparent', border: 'none', padding: '0.5rem 0', cursor: 'pointer', transition: 'color 0.2s', color: '#5f5f5f' }} onMouseOver={(e) => (e.target as HTMLElement).style.color = '#1a1a1a'} onMouseOut={(e) => (e.target as HTMLElement).style.color = '#5f5f5f'}>{s}</button>
+            <button key={s} onClick={() => scrollTo(s)} className="capitalize" style={{ background: 'transparent', border: 'none', padding: '0.5rem 0', cursor: 'pointer', transition: 'color 0.2s', color: '#5f5f5f' }} onMouseOver={(e) => (e.target as HTMLElement).style.color = '#1a1a1a'} onMouseOut={(e) => (e.target as HTMLElement).style.color = '#5f5f5f'}>{s}</button>
           ))}
         </div>
-        <button style={{ cursor: "pointer" }} onClick={() => scrollTo('contact')} className="int-btn text-base px-5 py-2">Book Consult</button>
+        <button onClick={() => scrollTo('contact')} className="int-btn text-base px-5 py-2">Book Consult</button>
       </nav>
 
       <main>
@@ -189,8 +189,8 @@ export default function Home() {
                 Our team of designers, architects, and project managers brings together diverse perspectives united by a single commitment: to create interiors that feel inevitable, as though they could not have been designed any other way. Whether you are renovating a Victorian in Pacific Heights, furnishing a SOMA loft, or launching a boutique hotel, we meet you where you are and take you somewhere extraordinary.
               </p>
               <div className="flex gap-4">
-                <button style={{ cursor: "pointer" }} onClick={() => scrollTo('portfolio')} className="int-btn-outline px-8 py-3 font-medium">View Our Work</button>
-                <button style={{ cursor: "pointer" }} onClick={() => scrollTo('contact')} className="int-btn btn px-8 py-3 font-medium">Start a Project</button>
+                <button onClick={() => scrollTo('portfolio')} className="int-btn-outline px-8 py-3 font-medium">View Our Work</button>
+                <button onClick={() => scrollTo('contact')} className="int-btn btn px-8 py-3 font-medium">Start a Project</button>
               </div>
             </div>
             <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=600&q=80" alt="Atelier Interiors — a thoughtfully designed living space" className="w-full h-96 object-cover img-hover" loading="lazy" />
@@ -309,7 +309,7 @@ export default function Home() {
             <div className="space-y-0">
               {faqs.map((f, i) => (
                 <div key={i} className="border-b" style={{ borderColor: '#e5e5e5' }}>
-                  <button style={{ cursor: "pointer" }} className="int-btn w-full flex justify-between items-center py-5 text-left" onClick={() => setOpenFaq(openFaq === i ? null : i)} >
+                  <button className="int-btn w-full flex justify-between items-center py-5 text-left" onClick={() => setOpenFaq(openFaq === i ? null : i)} >
                     <span className="font-medium pr-4">{f.q}</span>
                     <span className="flex-shrink-0 text-lg opacity-90">{openFaq === i ? '−' : '+'}</span>
                   </button>
@@ -374,7 +374,7 @@ export default function Home() {
                     <option>Not sure yet</option>
                   </select>
                   <textarea rows={4} placeholder="Tell us about your project — what inspired you, what isn't working now, and what you envision..." className="w-full px-4 py-3 rounded border border-gray-300 " style={{ border: '1px solid #d4c9b8', background: 'white' }} />
-                  <button style={{ cursor: "pointer" }} type="submit" className="w-full py-3 font-medium rounded" style={{ background: 'var(--terracotta)', color: 'white' }}>Request Consultation</button>
+                  <button type="submit" className="w-full py-3 font-medium rounded" style={{ background: 'var(--terracotta)', color: 'white' }}>Request Consultation</button>
                   <p className="text-sm opacity-90 text-center">We respond within 48 hours. No spam, ever.</p>
                 </form>
               )}

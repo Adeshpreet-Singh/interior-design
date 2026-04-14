@@ -85,12 +85,12 @@ export default function InteriorDesign() {
       {/* Hero — Editorial Split */}
       <section className="relative pt-28 pb-20 px-6 textured-bg overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full">
-          <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=900&q=80" alt="Interior" className="w-full h-full object-cover opacity-20" />
+          <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=900&q=80" alt="Interior" className="w-full h-full object-cover opacity-80" />
         </div>
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative">
           <div>
             <span className="sage-accent text-sm font-semibold tracking-wider uppercase">Interior Design Studio</span>
-            <h1 className="text-5xl md:text-6xl font-bold leading-tight mt-4 mb-6" style={{ color: '#1a1a1a' }}>
+            <h1 className="text-5xl md:text-6xl font-bold leading-normal mt-4 mb-6" style={{ color: '#1a1a1a' }}>
               Spaces that feel<br />
               <span style={{ color: '#87a878' }}>like home</span>
             </h1>

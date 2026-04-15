@@ -1,5 +1,6 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
 
 :root {
   --sage: #87a878;
@@ -10,7 +11,7 @@
   --cream: #fefdf9;
   --linen: #faf8f5;
   --sand: #f5f3ef;
-  --stone: #9a9590;
+  --stone: #7d7873;
   --charcoal: #2d2d2d;
   --shadow-soft: 0 4px 20px rgba(135,168,120,0.08);
   --shadow-medium: 0 10px 40px rgba(135,168,120,0.12);
@@ -434,7 +435,6 @@ body {
 .int-card:nth-child(2) { transition-delay: 80ms; }
 .int-card:nth-child(3) { transition-delay: 160ms; }
 .int-card:nth-child(4) { transition-delay: 240ms; }
-
 
 /* ===== FINAL 10/10 POLISH ===== */
 

@@ -73,7 +73,7 @@ export default function InteriorDesign() {
           </div>
           <div className="hidden md:flex items-center gap-8">
             {['Services', 'Portfolio', 'Process', 'Awards', 'Testimonials', 'Contact'].map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} className="text-sm transition-colors" style={{ color: '#6b7280' }}>{item}</a>
+              <a key={item} href={`#${item.toLowerCase()}`} className="text-sm transition-colors" style={{ color: '#8b9099' }}>{item}</a>
             ))}
           </div>
           <button className="btn-sage px-5 py-2.5 rounded-full text-sm font-semibold">
@@ -94,7 +94,7 @@ export default function InteriorDesign() {
               Spaces that feel<br />
               <span style={{ color: '#87a878' }}>like home</span>
             </h1>
-            <p className="text-lg mb-8 max-w-lg leading-relaxed" style={{ color: '#6b7280' }}>
+            <p className="text-lg mb-8 max-w-lg leading-relaxed" style={{ color: '#8b9099' }}>
               We craft interiors that honor architecture, celebrate light, and reflect the people who live in them. From concept to completion, every detail is intentional. Over 250 projects delivered since 2008.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -109,7 +109,7 @@ export default function InteriorDesign() {
             <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=700&q=80" alt="Beautiful interior" className="relative rounded-3xl shadow-xl w-full" />
             <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-5 shadow-lg">
               <div className="text-3xl font-bold" style={{ color: '#87a878' }}>250+</div>
-              <div className="text-sm" style={{ color: '#6b7280' }}>Projects Completed</div>
+              <div className="text-sm" style={{ color: '#8b9099' }}>Projects Completed</div>
             </div>
           </div>
         </div>
@@ -126,7 +126,7 @@ export default function InteriorDesign() {
           ].map((s, i) => (
             <div key={i} className="text-center">
               <div className="text-3xl font-bold" style={{ color: '#87a878' }}>{s.val}</div>
-              <div className="text-xs uppercase tracking-wider mt-1" style={{ color: '#9ca3af' }}>{s.label}</div>
+              <div className="text-xs uppercase tracking-wider mt-1" style={{ color: '#b0b5bc' }}>{s.label}</div>
             </div>
           ))}
         </div>
@@ -145,7 +145,7 @@ export default function InteriorDesign() {
               <div key={s.name} className="scroll-reveal card-elegant rounded-2xl p-6 sage-border-top" style={{ transitionDelay: `${i * 100}ms` }}>
                 <span className="text-4xl mb-4 block">{s.icon}</span>
                 <h3 className="text-xl font-bold mb-3" style={{ color: '#1a1a1a' }}>{s.name}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: '#6b7280' }}>{s.desc}</p>
+                <p className="text-sm leading-relaxed" style={{ color: '#8b9099' }}>{s.desc}</p>
               </div>
             ))}
           </div>
@@ -187,7 +187,7 @@ export default function InteriorDesign() {
               <div key={p.step} className="scroll-reveal text-center" style={{ transitionDelay: `${i * 100}ms` }}>
                 <div className="w-16 h-16 rounded-full sage-gradient text-white text-xl font-bold flex items-center justify-center mx-auto mb-4">{p.step}</div>
                 <h3 className="text-xl font-bold mb-2" style={{ color: '#1a1a1a' }}>{p.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: '#6b7280' }}>{p.desc}</p>
+                <p className="text-sm leading-relaxed" style={{ color: '#8b9099' }}>{p.desc}</p>
               </div>
             ))}
           </div>
@@ -201,7 +201,7 @@ export default function InteriorDesign() {
             <span className="sage-accent text-sm font-semibold tracking-wider uppercase">Craftsmanship</span>
             <h2 className="text-4xl font-bold mt-2" style={{ color: '#1a1a1a' }}>Our Materials</h2>
             <div className="process-line mx-auto mt-4"></div>
-            <p className="mt-4 max-w-xl mx-auto" style={{ color: '#6b7280' }}>We source the finest natural materials from trusted artisans worldwide. Quality you can see and feel.</p>
+            <p className="mt-4 max-w-xl mx-auto" style={{ color: '#8b9099' }}>We source the finest natural materials from trusted artisans worldwide. Quality you can see and feel.</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {MATERIALS.map((m, i) => (
@@ -211,7 +211,7 @@ export default function InteriorDesign() {
                 </div>
                 <div className="p-4 text-center">
                   <h4 className="font-bold" style={{ color: '#1a1a1a' }}>{m.name}</h4>
-                  <p className="text-xs" style={{ color: '#9ca3af' }}>{m.use}</p>
+                  <p className="text-xs" style={{ color: '#b0b5bc' }}>{m.use}</p>
                 </div>
               </div>
             ))}
@@ -233,7 +233,7 @@ export default function InteriorDesign() {
                 <div className="w-16 h-16 rounded-full sage-gradient flex items-center justify-center text-white font-bold flex-shrink-0">{a.year}</div>
                 <div>
                   <h4 className="font-bold text-lg" style={{ color: '#1a1a1a' }}>{a.title}</h4>
-                  <p className="text-sm" style={{ color: '#6b7280' }}>{a.org}</p>
+                  <p className="text-sm" style={{ color: '#8b9099' }}>{a.org}</p>
                 </div>
               </div>
             ))}
@@ -273,14 +273,14 @@ export default function InteriorDesign() {
                     <span key={j} style={{ color: '#87a878' }}>★</span>
                   ))}
                 </div>
-                <p className="leading-relaxed mb-6 italic" style={{ color: '#6b7280' }}>&ldquo;{t.text}&rdquo;</p>
+                <p className="leading-relaxed mb-6 italic" style={{ color: '#8b9099' }}>&ldquo;{t.text}&rdquo;</p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full sage-gradient flex items-center justify-center text-white font-bold text-sm">
                     {t.name[0]}
                   </div>
                   <div>
                     <div className="font-semibold text-sm" style={{ color: '#1a1a1a' }}>{t.name}</div>
-                    <div className="text-xs" style={{ color: '#9ca3af' }}>{t.role}</div>
+                    <div className="text-xs" style={{ color: '#b0b5bc' }}>{t.role}</div>
                   </div>
                 </div>
               </div>
@@ -301,25 +301,25 @@ export default function InteriorDesign() {
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <h3 className="text-xl font-bold mb-4" style={{ color: '#1a1a1a' }}>Let&apos;s create something beautiful</h3>
-                <p className="mb-6 leading-relaxed" style={{ color: '#6b7280' }}>Whether you&apos;re renovating a single room or designing an entire home, we&apos;d love to hear your vision.</p>
+                <p className="mb-6 leading-relaxed" style={{ color: '#8b9099' }}>Whether you&apos;re renovating a single room or designing an entire home, we&apos;d love to hear your vision.</p>
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'rgba(135,168,120,0.1)' }}>
                       <span>📍</span>
                     </div>
-                    <span className="text-sm" style={{ color: '#6b7280' }}>421 Elm Street, Suite 200, Portland, OR</span>
+                    <span className="text-sm" style={{ color: '#8b9099' }}>421 Elm Street, Suite 200, Portland, OR</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'rgba(135,168,120,0.1)' }}>
                       <span>📧</span>
                     </div>
-                    <span className="text-sm" style={{ color: '#6b7280' }}>hello@studioverdure.com</span>
+                    <span className="text-sm" style={{ color: '#8b9099' }}>hello@studioverdure.com</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'rgba(135,168,120,0.1)' }}>
                       <span>📞</span>
                     </div>
-                    <span className="text-sm" style={{ color: '#6b7280' }}>(503) 555-0142</span>
+                    <span className="text-sm" style={{ color: '#8b9099' }}>(503) 555-0142</span>
                   </div>
                 </div>
                 <div className="mt-8">
@@ -331,7 +331,7 @@ export default function InteriorDesign() {
                   <div className="text-center py-12">
                     <div className="text-5xl mb-4" style={{ color: '#87a878' }}>✓</div>
                     <h4 className="text-xl font-bold mb-2" style={{ color: '#1a1a1a' }}>Message Sent!</h4>
-                    <p className="text-sm" style={{ color: '#6b7280' }}>We&apos;ll get back to you within 24 hours.</p>
+                    <p className="text-sm" style={{ color: '#8b9099' }}>We&apos;ll get back to you within 24 hours.</p>
                   </div>
                 ) : (
                   <>
@@ -339,7 +339,7 @@ export default function InteriorDesign() {
                       className="w-full px-5 py-3 rounded-xl border bg-white text-sm transition-all" style={{ borderColor: '#e5e7eb' }} />
                     <input type="email" placeholder="Email Address" value={contactForm.email} onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
                       className="w-full px-5 py-3 rounded-xl border bg-white text-sm transition-all" style={{ borderColor: '#e5e7eb' }} />
-                    <select className="w-full px-5 py-3 rounded-xl border bg-white text-sm transition-all" style={{ borderColor: '#e5e7eb', color: '#6b7280' }}>
+                    <select className="w-full px-5 py-3 rounded-xl border bg-white text-sm transition-all" style={{ borderColor: '#e5e7eb', color: '#8b9099' }}>
                       <option value="">Project Type</option>
                       {SERVICES.map(s => <option key={s.name}>{s.name}</option>)}
                     </select>
@@ -363,7 +363,7 @@ export default function InteriorDesign() {
                 <div className="w-10 h-10 rounded-full sage-gradient flex items-center justify-center text-white font-bold">V</div>
                 <span className="text-xl font-bold text-white">Studio Verdure</span>
               </div>
-              <p className="text-sm leading-relaxed" style={{ color: '#9ca3af' }}>Crafting beautiful, livable spaces since 2008.</p>
+              <p className="text-sm leading-relaxed" style={{ color: '#b0b5bc' }}>Crafting beautiful, livable spaces since 2008.</p>
             </div>
             {[
               { title: 'Services', links: ['Residential', 'Commercial', 'Kitchen & Bath', 'Color Consulting'] },
@@ -374,17 +374,17 @@ export default function InteriorDesign() {
                 <h4 className="text-white font-semibold mb-4">{col.title}</h4>
                 <ul className="space-y-2">
                   {col.links.map((link) => (
-                    <li key={link}><a href="#" className="text-sm transition-colors" style={{ color: '#9ca3af' }}>{link}</a></li>
+                    <li key={link}><a href="#" className="text-sm transition-colors" style={{ color: '#b0b5bc' }}>{link}</a></li>
                   ))}
                 </ul>
               </div>
             ))}
           </div>
           <div className="border-t pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style={{ borderColor: '#374151' }}>
-            <p className="text-sm" style={{ color: '#6b7280' }}>© 2026 Studio Verdure. All rights reserved.</p>
+            <p className="text-sm" style={{ color: '#8b9099' }}>© 2026 Studio Verdure. All rights reserved.</p>
             <div className="flex gap-6">
               {['Privacy', 'Terms', 'Sitemap'].map((link) => (
-                <a key={link} href="#" className="text-sm transition-colors" style={{ color: '#6b7280' }}>{link}</a>
+                <a key={link} href="#" className="text-sm transition-colors" style={{ color: '#8b9099' }}>{link}</a>
               ))}
             </div>
           </div>

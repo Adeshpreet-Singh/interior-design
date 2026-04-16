@@ -1,2249 +1,1408 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
 
-const SERVICES = [
-  { name: 'Residential Design', icon: '🏠', desc: 'Complete home transformations — from architectural millwork and built-in cabinetry to textiles, lighting, and art curation. We create spaces that balance timeless elegance with everyday comfort.' },
-  { name: 'Commercial Spaces', icon: '🏢', desc: 'Offices, retail, restaurants, and hospitality venues designed to elevate brand identity and optimize human experience while meeting codes and accessibility standards.' },
-  { name: 'Kitchen & Bath', icon: '🍳', desc: 'Specialized design for the two rooms that matter most. We handle space planning, cabinetry, countertops, fixtures, and lighting — marrying ergonomics with aesthetics.' },
-  { name: 'Color Consultation', icon: '🎨', desc: 'Expert color strategy that sets the emotional tone of every room. We analyze natural light, architecture, and lifestyle to craft palettes that feel intentional and harmonious.' },
-];
+import { useState } from 'react';
 
-const PORTFOLIO = [
-  { title: 'Nordic Living Room', cat: 'Residential', img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=80' },/
-  { title: 'Modern Kitchen', cat: 'Kitchen & Bath', img: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80' },/
-  { title: 'Boutique Hotel Lobby', cat: 'Commercial', img: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600&q=80' },/
-  { title: 'Serene Master Bath', cat: 'Kitchen & Bath', img: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&q=80' },/
-  { title: 'Minimalist Office', cat: 'Commercial', img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80' },/
-  { title: 'Cozy Reading Nook', cat: 'Residential', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80' },/
-];
+export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
 
-const PROCESS = [
-  { step: '01', title: 'Discovery', desc: 'We listen deeply to your vision, lifestyle, and budget. Through site visits and collaborative conversations, we uncover the soul of your space.' },
-  { step: '02', title: 'Concept', desc: 'Mood boards, material palettes, and spatial concepts come together. We present a cohesive design direction that resonates with your identity.' },
-  { step: '03', title: 'Design', desc: 'Detailed floor plans, 3D renderings, and specification documents bring the concept to life. Every detail is intentional.' },
-  { step: '04', title: 'Realize', desc: 'We manage procurement, coordinate contractors, and oversee installation — ensuring the final result exceeds your expectations.' },
-];
+  const services = [
+    { title: 'Residential Design', desc: 'Full-service interior design for homes, apartments, and private residences.', icon: '🏠' },
+    { title: 'Commercial Spaces', desc: 'Offices, retail environments, and corporate interiors that inspire.', icon: '🏢' },
+    { title: 'Hospitality Design', desc: 'Hotels, restaurants, and bars with unforgettable atmospheres.', icon: '✨' },
+    { title: 'Renovation', desc: 'Complete interior transformations and thoughtful space reimagining.', icon: '🔨' },
+    { title: 'Styling', desc: 'Furniture selection, art curation, and finishing touches.', icon: '🪑' },
+    { title: '3D Visualization', desc: 'Photorealistic renderings to preview your space before construction.', icon: '📐' },
+  ];
 
-const TESTIMONIALS = [
-  { name: 'Emily Foster', role: 'Homeowner', text: 'Working with Studio Verdure was transformative. They turned our dated colonial into a warm, modern sanctuary. Every room tells a story.', rating: 5 },
-  { name: 'David Park', role: 'Restaurant Owner', text: 'Our restaurant redesign led to a 40% increase in reservations. The atmosphere they created is exactly what we envisioned — elegant yet approachable.', rating: 5 },
-  { name: 'Lisa Okonkwo', role: 'Tech CEO', text: 'The office redesign boosted team morale dramatically. The biophilic design elements and natural light integration were genius touches.', rating: 5 },
-];
+  const projects = [
+    { name: 'Pacific Heights Residence', type: 'Residential', location: 'San Francisco, CA', img: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600&q=80', alt: 'Luxury living room with ocean views' },
+    { name: 'The Greenwich Hotel Lobby', type: 'Hospitality', location: 'New York, NY', img: 'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?w=600&q=80', alt: 'Elegant hotel lobby interior' },
+    { name: 'SoHo Tech Office', type: 'Commercial', location: 'New York, NY', img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80', alt: 'Modern office interior' },
+    { name: 'Beacon Hill Townhouse', type: 'Renovation', location: 'Boston, MA', img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80', alt: 'Classic townhouse renovation' },
+  ];
 
-const AWARDS = [
-  { year: '2025', title: 'Best Residential Interior', org: 'AIA Portland Chapter' },
-  { year: '2024', title: 'Emerging Studio of the Year', org: 'Interior Design Magazine' },
-  { year: '2024', title: 'Sustainable Design Award', org: 'USGBC Oregon' },
-  { year: '2023', title: 'Best Commercial Space', org: 'IIDA Northern Pacific' },
-];
+  const team = [
+    { name: 'Isabella Romano', role: 'Principal Designer', img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&q=80' },
+    { name: 'Thomas Wright', role: 'Design Director', img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&q=80' },
+    { name: 'Amelia Foster', role: 'Senior Stylist', img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&q=80' },
+    { name: 'Marcus Chen', role: '3D Visualization Lead', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80' },
+  ];
 
-const MATERIALS = [
-  { name: 'White Oak', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=300&h=300&fit=crop', use: 'Flooring & millwork' },/
-  { name: 'Carrara Marble', img: 'https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=300&h=300&fit=crop', use: 'Countertops & accents' },/
-  { name: 'Belgian Linen', img: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=300&h=300&fit=crop', use: 'Upholstery & drapery' },/
-  { name: 'Brushed Brass', img: 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=300&h=300&fit=crop', use: 'Hardware & fixtures' },/
-];
-
-function useReveal() {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
-      { threshold: 0.1 }
-    );
-    ref.current?.querySelectorAll('.scroll-reveal').forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-  return ref;
-}
-
-export default function InteriorDesign() {
-  const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
-  const containerRef = useReveal();
+  const testimonials = [
+    { text: "Atelier transformed our house into a home that perfectly reflects our family's personality and lifestyle.", author: 'Christine & Mark Taylor', role: 'Residential Client' },
+    { text: "The hotel lobby redesign increased our guest satisfaction scores by 35%. Truly exceptional work.", author: 'Jonathan Reed', company: 'The Greenwich Hotel', role: 'General Manager' },
+    { text: "They created an office space that our employees actually enjoy coming to. Productivity has never been higher.", author: 'Sarah Mitchell', company: 'TechVentures', role: 'CEO' },
+  ];
 
   return (
-    <div ref={containerRef> className="min-h-screen">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-cream/80 backdrop-blur-lg border-b border-sage/10" style={{ background: 'rgba(250,248,245,0.85)', borderColor: 'rgba(135,168,120,0.1)' }>>
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full sage-gradient flex items-center justify-center text-white font-bold">V
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+    <div className="min-h-screen bg-white px-4 md:px-8">
+      {/* Header */}
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-50 px-4 md:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 px-4 md:px-8">
+          <div className="flex justify-between items-center h-20 px-4 md:px-8">
+            <div className="flex items-center gap-3 px-4 md:px-8">
+              <div className="w-10 h-10 bg-[#1a202c] rounded flex items-center justify-center px-4 md:px-8">
+                <span className="text-white font-bold text-xl px-4 md:px-8">A</span>
+              
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-            <span className="text-xl font-bold" style={{ color: '#2c2c2c' }>>Studio Verdure</span>/
-          
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+    </div>
+              <div>
+                <span className="text-xl font-bold text-[#1a202c] px-4 md:px-8">Atelier</span>
+                <span className="text-sm text-gray-500 block -mt-1 px-4 md:px-8">Interiors</span>
+              
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-          <div className="hidden md:flex items-center gap-8">
-            {['Services', 'Portfolio', 'Process', 'Awards', 'Testimonials', 'Contact'].map((item) => (
-              <a key={item} href={`#${item.toLowerCase(})}`} className="text-sm transition-colors" style={{ color: '#8b9099' }>>{item}</a>/
-            ))}
-          
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-          <button className="btn-sage px-5 py-2.5 rounded-full text-sm font-semibold">
-            Book Consultation
-          </button>/
-        
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-      </nav>/
-
-      {/* Hero — Editorial Split */}
-      <section className="relative pt-28 pb-20 px-6 textured-bg overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full">/
-          <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=900&q=80" alt="Interior" className="w-full h-full object-cover opacity-80" />
-        
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative">
-          <div>
-            <span className="sage-accent text-sm font-semibold tracking-wider uppercase">Interior Design Studio</span>/
-            <h1 className="text-5xl md:text-6xl font-bold leading-normal mt-4 mb-6" style={{ color: '#1a1a1a' }>>
-              Spaces that feel<br />/
-              <span style={{ color: '#87a878' }>>like home</span>/
-            </h1>/
-            <p className="text-lg mb-8 max-w-lg leading-relaxed" style={{ color: '#8b9099' }>>
-              We craft interiors that honor architecture, celebrate light, and reflect the people who live in them. From concept to completion, every detail is intentional. Over 250 projects delivered since 2008.
-            </p>/
-            <div className="flex flex-wrap gap-4">
-              <button className="btn-sage px-8 py-4 rounded-full font-semibold">Start Your Project</button>/
-              <button className="px-8 py-4 rounded-full border-2 font-semibold transition-all" style={{ borderColor: '#87a878', color: '#87a878' }>>
-                View Portfolio
-              </button>/
+    </div>
             
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
+
+            <nav className="hidden md:flex items-center gap-8 px-4 md:px-8" aria-label="Main navigation">
+              <a href="#services" className="text-gray-700 hover:text-[#1a202c] font-medium transition-colors px-4 md:px-8">Services</a>
+              <a href="#portfolio" className="text-gray-700 hover:text-[#1a202c] font-medium transition-colors px-4 md:px-8">Portfolio</a>
+              <a href="#team" className="text-gray-700 hover:text-[#1a202c] font-medium transition-colors px-4 md:px-8">Team</a>
+              <a href="#testimonials" className="text-gray-700 hover:text-[#1a202c] font-medium transition-colors px-4 md:px-8">Testimonials</a>
+              <a href="#contact" className="bg-[#1a202c] text-white px-6 py-2.5 rounded font-semibold hover:bg-[#2d3748] transition-colors px-4 md:px-8">Book Consultation</a>
+            </nav>
+
+            <button
+              className="md:hidden p-2 px-4 md:px-8"
+              onClick={() = style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "var(--primary)", color: "white", border: "none", cursor: "pointer", transition: "transform 0.2s, box-shadow 0.2s" }}> setMenuOpen(!menuOpen)}
+              aria-expanded={menuOpen}
+              aria-label="Toggle menu"
+            >
+              <svg className="w-6 h-6 px-4 md:px-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={menuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} / style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>
+              </svg>
+            </button>
           
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-          <div className="relative">
-            <div className="absolute -top-6 -left-6 w-full h-full rounded-3xl" style={{ background: 'rgba(135,168,120,0.1)' }>>
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+    </div>
 
-    </div>/
-            <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=700&q=80" alt="Beautiful interior" className="relative rounded-3xl shadow-xl w-full" />
-            <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-5 shadow-lg">
-              <div className="text-3xl font-bold" style={{ color: '#87a878' }>>250+
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+          {menuOpen && (
+            <nav className="md:hidden py-4 border-t px-4 md:px-8" aria-label="Mobile navigation">
+              <div className="flex flex-col gap-4 px-4 md:px-8">
+                <a href="#services" className="text-gray-700 hover:text-[#1a202c] font-medium px-4 md:px-8">Services</a>
+                <a href="#portfolio" className="text-gray-700 hover:text-[#1a202c] font-medium px-4 md:px-8">Portfolio</a>
+                <a href="#team" className="text-gray-700 hover:text-[#1a202c] font-medium px-4 md:px-8">Team</a>
+                <a href="#testimonials" className="text-gray-700 hover:text-[#1a202c] font-medium px-4 md:px-8">Testimonials</a>
+                <a href="#contact" className="bg-[#1a202c] text-white px-6 py-2.5 rounded font-semibold text-center px-4 md:px-8">Book Consultation</a>
+              
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-              <div className="text-sm" style={{ color: '#8b9099' }>>Projects Completed
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+    </div>
+            </nav>
+          )}
+        
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
+      </header>
+
+      {/* Hero */}
+      <section className="relative bg-[#f8f9fa] py-20 lg:py-28 px-4 md:px-8" style={{ padding: "5rem 1rem", marginBottom: "2rem" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 px-4 md:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center px-4 md:px-8">
+            <div>
+              <div className="inline-flex items-center gap-2 bg-[#48bb78]/10 text-[#276749] px-4 py-2 rounded-full text-sm font-semibold mb-6 px-4 md:px-8">
+                <span className="w-2 h-2 bg-[#68d391] rounded-full px-4 md:px-8"></span>
+                Award-Winning Design
+              
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-[#1a202c] leading-tight mb-6 px-4 md:px-8" style={{ fontSize: "3rem", fontWeight: "bold", marginBottom: "1.5rem", lineHeight: "1.2" }}>
+                Spaces That Tell <span className="text-[#48bb78] px-4 md:px-8">Your Story</span>
+              </h1>
+              <p className="text-lg text-gray-600 mb-8 max-w-xl px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>
+                Atelier Interiors creates exceptional living and working environments that blend timeless elegance with modern functionality, tailored to your unique vision.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 px-4 md:px-8">
+                <a href="#contact" className="bg-[#1a202c] text-white px-8 py-4 rounded font-semibold text-center hover:bg-[#2d3748] transition-colors px-4 md:px-8">
+                  Book Free Consultation
+                </a>
+                <a href="#portfolio" className="border-2 border-[#1a202c] text-[#1a202c] px-8 py-4 rounded font-semibold text-center hover:bg-[#1a202c] hover:text-white transition-colors px-4 md:px-8">
+                  View Portfolio
+                </a>
+              
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
             
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
+            <div className="relative px-4 md:px-8">
+              <img
+                src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80"
+                alt="Beautifully designed living room with natural light"
+                className="rounded-xl shadow-2xl px-4 md:px-8"
+              />
+              <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-lg shadow-lg border border-gray-100 px-4 md:px-8">
+                <div className="text-3xl font-bold text-[#1a202c] px-4 md:px-8">300+
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+                <div className="text-sm text-gray-600 px-4 md:px-8">Spaces Transformed
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+              
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+            
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
           
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
         
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-      </section>/
+    </div>
+      </section>
 
-      {/* Stats Strip */}
-      <section className="scroll-reveal py-12 warm-section">
-        <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[
-            { val: '250+', label: 'Projects' },
-            { val: '17', label: 'Years' },
-            { val: '98%', label: 'Satisfaction' },
-            { val: '12', label: 'Awards' },
-          ].map((s, i) => (
-            <div key={i> className="text-center">
-              <div className="text-3xl font-bold" style={{ color: '#87a878' }>>{s.val}
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-              <div className="text-xs uppercase tracking-wider mt-1" style={{ color: '#b0b5bc' }>>{s.label}
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
+      {/* Trust Bar */}
+      <section className="py-8 bg-white border-y border-gray-100 px-4 md:px-8" style={{ padding: "5rem 1rem", marginBottom: "2rem" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 px-4 md:px-8">
+          <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16 px-4 md:px-8">
+            <div className="flex items-center gap-2 text-gray-500 px-4 md:px-8">
+              <svg className="w-6 h-6 text-[#48bb78] px-4 md:px-8" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" / style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}></svg>
+              <span className="font-semibold text-sm px-4 md:px-8">ASID Member</span>
             
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-          ))}
+    </div>
+            <div className="flex items-center gap-2 text-gray-500 px-4 md:px-8">
+              <svg className="w-6 h-6 text-[#48bb78] px-4 md:px-8" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" / style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}></svg>
+              <span className="font-semibold text-sm px-4 md:px-8">NCIDQ Certified</span>
+            
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+            <div className="flex items-center gap-2 text-gray-500 px-4 md:px-8">
+              <svg className="w-6 h-6 text-[#48bb78] px-4 md:px-8" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" / style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}></svg>
+              <span className="font-semibold text-sm px-4 md:px-8">Best of Houzz 2024</span>
+            
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+            <div className="flex items-center gap-2 text-gray-500 px-4 md:px-8">
+              <svg className="w-6 h-6 text-[#48bb78] px-4 md:px-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" / style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}></svg>
+              <span className="font-semibold text-sm px-4 md:px-8">15 Years Experience</span>
+            
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+          
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
         
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-      </section>/
+    </div>
+      </section>
+
+      {/* Stats */}
+      <section className="py-16 bg-[#1a202c] px-4 md:px-8" style={{ padding: "5rem 1rem", marginBottom: "2rem" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 px-4 md:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center px-4 md:px-8">
+            <div>
+              <div className="text-4xl lg:text-5xl font-bold text-white mb-2 px-4 md:px-8">300+
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+              <div className="text-[#a0aec0] px-4 md:px-8">Projects Completed
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+            
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+            <div>
+              <div className="text-4xl lg:text-5xl font-bold text-white mb-2 px-4 md:px-8">25
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+              <div className="text-[#a0aec0] px-4 md:px-8">Design Awards
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+            
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+            <div>
+              <div className="text-4xl lg:text-5xl font-bold text-white mb-2 px-4 md:px-8">15
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+              <div className="text-[#a0aec0] px-4 md:px-8">Years of Excellence
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+            
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+            <div>
+              <div className="text-4xl lg:text-5xl font-bold text-white mb-2 px-4 md:px-8">100%
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+              <div className="text-[#a0aec0] px-4 md:px-8">Client Satisfaction
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+            
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+          
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+        
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+      </section>
 
       {/* Services */}
-      <section id="services" className="py-20 px-6 warm-section">
-        <div className="max-w-7xl mx-auto">
-          <div className="scroll-reveal text-center mb-16">
-            <span className="sage-accent text-sm font-semibold tracking-wider uppercase">What We Do</span>/
-            <h2 className="text-4xl font-bold mt-2" style={{ color: '#1a1a1a' }>>Our Services</h2>/
-            <div className="process-line mx-auto mt-4">
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
+      <section id="services" className="py-20 bg-white px-4 md:px-8" style={{ padding: "5rem 1rem", marginBottom: "2rem" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 px-4 md:px-8">
+          <div className="text-center mb-16 px-4 md:px-8">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#1a202c] mb-4 px-4 md:px-8" style={{ fontSize: "2.25rem", fontWeight: "bold", marginBottom: "1.25rem", lineHeight: "1.3" }}>Our Services</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>
+              Comprehensive interior design services for residential, commercial, and hospitality spaces.
+            </p>
           
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {SERVICES.map((s, i) => (
-              <div key={s.name} className="scroll-reveal card-elegant rounded-2xl p-6 sage-border-top" style={{  transitionDelay: `${i * 100} }}ms` }>>
-                <span className="text-4xl mb-4 block">{s.icon}</span>/
-                <h3 className="text-xl font-bold mb-3" style={{ color: '#1a1a1a' }>>{s.name}</h3>/
-                <p className="text-sm leading-relaxed" style={{ color: '#8b9099' }>>{s.desc}</p>/
+    </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 md:px-8">
+            {services.map((service, i) => (
+              <div key={i} className="card-pro bg-white p-8 px-4 md:px-8">
+                <div className="text-4xl mb-4 px-4 md:px-8">{service.icon}
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+                <h3 className="text-xl font-bold text-[#1a202c] mb-3 px-4 md:px-8" style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", lineHeight: "1.4" }}>{service.title}</h3>
+                <p className="text-gray-600 px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>{service.desc}</p>
               
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
             ))}
           
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
         
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-      </section>/
+    </div>
+      </section>
 
       {/* Portfolio */}
-      <section id="portfolio" className="py-20 px-6 textured-bg">
-        <div className="max-w-7xl mx-auto">
-          <div className="scroll-reveal text-center mb-16">
-            <span className="sage-accent text-sm font-semibold tracking-wider uppercase">Our Work</span>/
-            <h2 className="text-4xl font-bold mt-2" style={{ color: '#1a1a1a' }>>Portfolio Gallery</h2>/
-            <div className="process-line mx-auto mt-4">
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
+      <section id="portfolio" className="py-20 bg-[#f8f9fa] px-4 md:px-8" style={{ padding: "5rem 1rem", marginBottom: "2rem" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 px-4 md:px-8">
+          <div className="text-center mb-16 px-4 md:px-8">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#1a202c] mb-4 px-4 md:px-8" style={{ fontSize: "2.25rem", fontWeight: "bold", marginBottom: "1.25rem", lineHeight: "1.3" }}>Featured Projects</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>
+              Explore our portfolio of thoughtfully designed spaces.
+            </p>
           
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {PORTFOLIO.map((p, i) => (
-              <div key={p.title} className="scroll-reveal gallery-item rounded-2xl overflow-hidden relative cursor-pointer" style={{  transitionDelay: `${i * 80} }}ms` }>>
-                <img src={p.img} alt={p.title> className="w-full aspect-[4/3] object-cover" />
-                <div className="gallery-overlay absolute inset-0 flex flex-col justify-end p-6">
-                  <span className="text-sm font-medium" style={{ color: '#a3c294' }>>{p.cat}</span>/
-                  <span className="text-white text-xl font-bold">{p.title}</span>/
+    </div>
+          <div className="grid md:grid-cols-2 gap-8 px-4 md:px-8">
+            {projects.map((project, i) => (
+              <div key={i} className="card-pro bg-white overflow-hidden px-4 md:px-8">
+                <img src={project.img} alt={project.alt} className="w-full h-64 object-cover px-4 md:px-8" />
+                <div className="p-6 px-4 md:px-8">
+                  <div className="flex justify-between items-start mb-2 px-4 md:px-8">
+                    <span className="text-sm font-semibold text-[#48bb78] px-4 md:px-8">{project.type}</span>
+                    <span className="text-sm text-gray-500 px-4 md:px-8">{project.location}</span>
+                  
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+                  <h3 className="text-xl font-bold text-[#1a202c] px-4 md:px-8" style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", lineHeight: "1.4" }}>{project.name}</h3>
                 
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
               
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
             ))}
           
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
         
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-      </section>/
+    </div>
+      </section>
 
-      {/* Process */}
-      <section id="process" className="py-20 px-6 warm-section">
-        <div className="max-w-7xl mx-auto">
-          <div className="scroll-reveal text-center mb-16">
-            <span className="sage-accent text-sm font-semibold tracking-wider uppercase">How We Work</span>/
-            <h2 className="text-4xl font-bold mt-2" style={{ color: '#1a1a1a' }>>Our Process</h2>/
-            <div className="process-line mx-auto mt-4">
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
+      {/* Team */}
+      <section id="team" className="py-20 bg-white px-4 md:px-8" style={{ padding: "5rem 1rem", marginBottom: "2rem" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 px-4 md:px-8">
+          <div className="text-center mb-16 px-4 md:px-8">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#1a202c] mb-4 px-4 md:px-8" style={{ fontSize: "2.25rem", fontWeight: "bold", marginBottom: "1.25rem", lineHeight: "1.3" }}>Our Designers</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>
+              Passionate designers dedicated to creating spaces that inspire.
+            </p>
           
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-          <div className="grid md:grid-cols-4 gap-8">
-            {PROCESS.map((p, i) => (
-              <div key={p.step} className="scroll-reveal text-center" style={{  transitionDelay: `${i * 100} }}ms` }>>
-                <div className="w-16 h-16 rounded-full sage-gradient text-white text-xl font-bold flex items-center justify-center mx-auto mb-4">{p.step}
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-                <h3 className="text-xl font-bold mb-2" style={{ color: '#1a1a1a' }>>{p.title}</h3>/
-                <p className="text-sm leading-relaxed" style={{ color: '#8b9099' }>>{p.desc}</p>/
+    </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 md:px-8">
+            {team.map((member, i) => (
+              <div key={i} className="text-center px-4 md:px-8">
+                <img src={member.img} alt={member.name} className="w-32 h-32 rounded-full mx-auto mb-4 object-cover px-4 md:px-8" />
+                <h3 className="text-lg font-bold text-[#1a202c] px-4 md:px-8" style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", lineHeight: "1.4" }}>{member.name}</h3>
+                <p className="text-[#48bb78] font-medium px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>{member.role}</p>
               
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
             ))}
           
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
         
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-      </section>/
-
-      {/* Materials Palette */}
-      <section className="py-20 px-6 textured-bg">
-        <div className="max-w-7xl mx-auto">
-          <div className="scroll-reveal text-center mb-16">
-            <span className="sage-accent text-sm font-semibold tracking-wider uppercase">Craftsmanship</span>/
-            <h2 className="text-4xl font-bold mt-2" style={{ color: '#1a1a1a' }>>Our Materials</h2>/
-            <div className="process-line mx-auto mt-4">
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-            <p className="mt-4 max-w-xl mx-auto" style={{ color: '#8b9099' }>>We source the finest natural materials from trusted artisans worldwide. Quality you can see and feel.</p>/
-          
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {MATERIALS.map((m, i) => (
-              <div key={i} className="scroll-reveal card-elegant rounded-2xl overflow-hidden" style={{  transitionDelay: `${i * 80} }}ms` }>>
-                <div className="h-40 overflow-hidden">
-                  <img src={m.img} alt={m.name> className="w-full h-full object-cover gallery-item" />/
-                
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-                <div className="p-4 text-center">
-                  <h4 className="font-bold" style={{ color: '#1a1a1a' }>>{m.name}</h4>/
-                  <p className="text-xs" style={{ color: '#b0b5bc' }>>{m.use}</p>/
-                
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-              
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-            ))}
-          
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-        
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-      </section>/
-
-      {/* Awards */}
-      <section id="awards" className="py-20 px-6 warm-section">
-        <div className="max-w-5xl mx-auto">
-          <div className="scroll-reveal text-center mb-16">
-            <span className="sage-accent text-sm font-semibold tracking-wider uppercase">Recognition</span>/
-            <h2 className="text-4xl font-bold mt-2" style={{ color: '#1a1a1a' }>>Awards & Honors</h2>/
-            <div className="process-line mx-auto mt-4">
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-          
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-          <div className="grid md:grid-cols-2 gap-6">
-            {AWARDS.map((a, i) => (
-              <div key={i} className="scroll-reveal card-elegant rounded-2xl p-6 flex items-center gap-6" style={{  transitionDelay: `${i * 80} }}ms` }>>
-                <div className="w-16 h-16 rounded-full sage-gradient flex items-center justify-center text-white font-bold flex-shrink-0">{a.year}
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-                <div>
-                  <h4 className="font-bold text-lg" style={{ color: '#1a1a1a' }>>{a.title}</h4>/
-                  <p className="text-sm" style={{ color: '#8b9099' }>>{a.org}</p>/
-                
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-              
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-            ))}
-          
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-        
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-      </section>/
-
-      {/* Featured Project — Full Width */}
-      <section className="scroll-reveal relative py-32 px-6 overflow-hidden">
-        <div className="absolute inset-0">
-          <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1600&q=80" alt="Featured project" className="w-full h-full object-cover" />
-          <div className="absolute inset-0" style={{ background: 'rgba(44,44,44,0.7)' }> />/
-        
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-        <div className="relative max-w-3xl mx-auto text-center text-white">
-          <span className="text-sm font-semibold tracking-wider uppercase" style={{ color: '#a3c294' }>>Featured Project</span>/
-          <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6">The Portland Residence</h2>/
-          <p className="text-lg leading-relaxed mb-8" style={{ color: 'rgba(255,255,255,0.7)' }>>
-            A complete gut renovation of a 1920s craftsman home. We preserved original millwork and leaded glass while introducing modern open-plan living, a chef&apos;s kitchen, and a spa-inspired primary suite. The result honors the home&apos;s heritage while embracing contemporary comfort.
-          </p>/
-          <button className="btn-sage px-8 py-4 rounded-full font-semibold">View Case Study</button>/
-        
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-      </section>/
+    </div>
+      </section>
 
       {/* Testimonials */}
-      <section id="testimonials" className="py-20 px-6 textured-bg">
-        <div className="max-w-7xl mx-auto">
-          <div className="scroll-reveal text-center mb-16">
-            <span className="sage-accent text-sm font-semibold tracking-wider uppercase">Testimonials</span>/
-            <h2 className="text-4xl font-bold mt-2" style={{ color: '#1a1a1a' }>>Client Stories</h2>/
-            <div className="process-line mx-auto mt-4">
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
+      <section id="testimonials" className="py-20 bg-[#f8f9fa] px-4 md:px-8" style={{ padding: "5rem 1rem", marginBottom: "2rem" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 px-4 md:px-8">
+          <div className="text-center mb-16 px-4 md:px-8">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#1a202c] mb-4 px-4 md:px-8" style={{ fontSize: "2.25rem", fontWeight: "bold", marginBottom: "1.25rem", lineHeight: "1.3" }}>Client Stories</h2>
           
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-          <div className="grid md:grid-cols-3 gap-6">
-            {TESTIMONIALS.map((t, i) => (
-              <div key={t.name} className="scroll-reveal card-elegant rounded-2xl p-8" style={{  transitionDelay: `${i * 100} }}ms` }>>
-                <div className="flex gap-1 mb-4">
-                  {Array.from({ length: t.rating }).map((_, j) => (
-                    <span key={j} style={{ color: '#87a878' }>>★</span>/
+    </div>
+          <div className="grid md:grid-cols-3 gap-8 px-4 md:px-8">
+            {testimonials.map((t, i) => (
+              <div key={i} className="bg-white p-8 rounded-xl border border-gray-100 shadow-sm px-4 md:px-8">
+                <div className="flex gap-1 mb-4 px-4 md:px-8">
+                  {[...Array(5)].map((_, j) => (
+                    <svg key={j} className="w-5 h-5 text-[#48bb78] px-4 md:px-8" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" / style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>
+                    </svg>
                   ))}
                 
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-                <p className="leading-relaxed mb-6 italic" style={{ color: '#8b9099' }>>&ldquo;{t.text}&rdquo;</p>/
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full sage-gradient flex items-center justify-center text-white font-bold text-sm">
-                    {t.name[0]}
-                  
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+    </div>
+                <p className="text-gray-700 mb-6 italic px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>"{t.text}"</p>
+                <div>
+                  <div className="font-bold text-[#1a202c] px-4 md:px-8">{t.author}
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-                  <div>
-                    <div className="font-semibold text-sm" style={{ color: '#1a1a1a' }>>{t.name}
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+    </div>
+                  <div className="text-sm text-gray-500 px-4 md:px-8">{t.role}{t.company && `, ${t.company}`}
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-                    <div className="text-xs" style={{ color: '#b0b5bc' }>>{t.role}
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-                  
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
+    </div>
                 
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
               
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
             ))}
           
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
         
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-      </section>/
+    </div>
+      </section>
 
       {/* Contact */}
-      <section id="contact" className="py-20 px-6 warm-section">
-        <div className="max-w-4xl mx-auto">
-          <div className="scroll-reveal text-center mb-12">
-            <span className="sage-accent text-sm font-semibold tracking-wider uppercase">Get in Touch</span>/
-            <h2 className="text-4xl font-bold mt-2" style={{ color: '#1a1a1a' }>>Start Your Project</h2>/
-            <div className="process-line mx-auto mt-4">
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-          
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-          <div className="scroll-reveal card-elegant rounded-3xl p-10">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-bold mb-4" style={{ color: '#1a1a1a' }>>Let&apos;s create something beautiful</h3>/
-                <p className="mb-6 leading-relaxed" style={{ color: '#8b9099' }>>Whether you&apos;re renovating a single room or designing an entire home, we&apos;d love to hear your vision.</p>/
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'rgba(135,168,120,0.1)' }>>
-                      <span>📍</span>/
-                    
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-                    <span className="text-sm" style={{ color: '#8b9099' }>>421 Elm Street, Suite 200, Portland, OR</span>/
+      <section id="contact" className="py-20 bg-white px-4 md:px-8" style={{ padding: "5rem 1rem", marginBottom: "2rem" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 px-4 md:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 px-4 md:px-8">
+            <div>
+              <h2 className="text-3xl lg:text-4xl font-bold text-[#1a202c] mb-6 px-4 md:px-8" style={{ fontSize: "2.25rem", fontWeight: "bold", marginBottom: "1.25rem", lineHeight: "1.3" }}>Book Your Consultation</h2>
+              <p className="text-lg text-gray-600 mb-8 px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>
+                Start your design journey with a complimentary consultation. We'll discuss your vision, space, and how we can bring your dream interior to life.
+              </p>
+              <div className="space-y-6 px-4 md:px-8">
+                <div className="flex items-start gap-4 px-4 md:px-8">
+                  <div className="w-12 h-12 bg-[#48bb78]/10 rounded-lg flex items-center justify-center flex-shrink-0 px-4 md:px-8">
+                    <svg className="w-6 h-6 text-[#48bb78] px-4 md:px-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" / style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" / style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}></svg>
                   
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'rgba(135,168,120,0.1)' }>>
-                      <span>📧</span>/
-                    
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-                    <span className="text-sm" style={{ color: '#8b9099' }>>hello@studioverdure.com</span>/
+    </div>
+                  <div>
+                    <h3 className="font-semibold text-[#1a202c] px-4 md:px-8" style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", lineHeight: "1.4" }}>Showroom</h3>
+                    <p className="text-gray-600 px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>520 Design Row, Suite 300<br />San Francisco, CA 94102</p>
                   
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'rgba(135,168,120,0.1)' }>>
-                      <span>📞</span>/
-                    
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-                    <span className="text-sm" style={{ color: '#8b9099' }>>(503) 555-0142</span>/
-                  
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
+    </div>
                 
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-                <div className="mt-8">
-                  <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=400&h=250&fit=crop" alt="Studio" className="rounded-xl w-full h-40 object-cover" />
-                
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-              
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-              <div className="space-y-4">
-                {submitted ? (
-                  <div className="text-center py-12">
-                    <div className="text-5xl mb-4" style={{ color: '#87a878' }>>✓
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-                    <h4 className="text-xl font-bold mb-2" style={{ color: '#1a1a1a' }>>Message Sent!</h4>/
-                    <p className="text-sm" style={{ color: '#8b9099' }>>We&apos;ll get back to you within 24 hours.</p>/
+    </div>
+                <div className="flex items-start gap-4 px-4 md:px-8">
+                  <div className="w-12 h-12 bg-[#48bb78]/10 rounded-lg flex items-center justify-center flex-shrink-0 px-4 md:px-8">
+                    <svg className="w-6 h-6 text-[#48bb78] px-4 md:px-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" / style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}></svg>
                   
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-                ) : (
-                  <>
-                    <input type="text" placeholder="Your Name" value={contactForm.name> onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                      className="w-full px-5 py-3 rounded-xl border bg-white text-sm transition-all" style={{ borderColor: '#e5e7eb' }} />/
-                    <input type="email" placeholder="Email Address" value={contactForm.email> onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                      className="w-full px-5 py-3 rounded-xl border bg-white text-sm transition-all" style={{ borderColor: '#e5e7eb' }} />/
-                    <select className="w-full px-5 py-3 rounded-xl border bg-white text-sm transition-all" style={{ borderColor: '#e5e7eb', color: '#8b9099' }>>
-                      <option value="">Project Type</option>/
-                      {SERVICES.map(s => <option key={s.name>>{s.name}</option>)}/
-                    </select>/
-                    <textarea placeholder="Tell us about your project..." rows={4} value={contactForm.message> onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                      className="w-full px-5 py-3 rounded-xl border bg-white text-sm transition-all resize-none" style={{ borderColor: '#e5e7eb' }} />/
-                    <button onClick={() => setSubmitted(true)} className="btn-sage w-full py-3 rounded-xl font-semibold">Send Message</button>/
-                  </>/
-                )}
+    </div>
+                  <div>
+                    <h3 className="font-semibold text-[#1a202c] px-4 md:px-8" style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", lineHeight: "1.4" }}>Email</h3>
+                    <p className="text-gray-600 px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>studio@atelierinteriors.com</p>
+                  
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+                
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
               
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
             
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
+            <div className="bg-[#f8f9fa] p-8 rounded-xl px-4 md:px-8">
+              <form className="space-y-6 px-4 md:px-8" onSubmit={(e) => e.preventDefault()}>
+                <div className="grid md:grid-cols-2 gap-6 px-4 md:px-8">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2 px-4 md:px-8">Name</label>
+                    <input type="text" id="name" className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#48bb78] focus:border-transparent px-4 md:px-8" placeholder="Your Name" />
+                  
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2 px-4 md:px-8">Email</label>
+                    <input type="email" id="email" className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#48bb78] focus:border-transparent px-4 md:px-8" placeholder="you@email.com" />
+                  
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+                
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+                <div>
+                  <label htmlFor="project-type" className="block text-sm font-medium text-gray-700 mb-2 px-4 md:px-8">Project Type</label>
+                  <select id="project-type" className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#48bb78] focus:border-transparent px-4 md:px-8">
+                    <option value="">Select project type</option>
+                    <option value="residential">Residential</option>
+                    <option value="commercial">Commercial</option>
+                    <option value="hospitality">Hospitality</option>
+                    <option value="renovation">Renovation</option>
+                  </select>
+                
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2 px-4 md:px-8">Tell Us About Your Space</label>
+                  <textarea id="message" rows={4} className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#48bb78] focus:border-transparent px-4 md:px-8" placeholder="Describe your vision..."></textarea>
+                
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+                <button type="submit" className="w-full bg-[#1a202c] text-white py-4 rounded-lg font-semibold hover:bg-[#2d3748] transition-colors px-4 md:px-8" style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "var(--primary)", color: "white", border: "none", cursor: "pointer", transition: "transform 0.2s, box-shadow 0.2s" }}>
+                  Book Free Consultation
+                </button>
+              </form>
+            
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
           
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
         
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-      </section>/
+    </div>
+      </section>
 
       {/* Footer */}
-      
-      <section className="section reveal" style={{  background: 'linear-gradient(135deg, #7c3aed, #7c3aeddd)',
-        color: 'white',
-        textAlign: 'center'
-       }>>
-        <div className="container">
-          <h2 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem'  }>>
-            Ready to Transform Your Business?
-          </h2>/
-          <p style={{ fontSize: '1.25rem', 
-            opacity: 0.9,
-            maxWidth: '600px',
-            margin: '0 auto 2.5rem'
-           }>>
-            Join hundreds of satisfied clients who have achieved remarkable results with our design studio solutions.
-          </p>/
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap'  }>>
-            <button className="btn-primary btn-lg" style={{  background: 'white', color: '#7c3aed'  }>>
-              Start Your Project Today
-            </button>/
-            <button className="btn-secondary btn-lg" style={{ borderColor: 'white', color: 'white'  }>>
-              Schedule a Call
-            </button>/
-          </div>/
-        </div>/
-      </section>/
-
-<footer className="py-16 px-6" style={{ background: '#2c2c2c' }>>
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
+      <footer className="bg-[#1a202c] text-white py-16 px-4 md:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 px-4 md:px-8">
+          <div className="grid md:grid-cols-4 gap-8 mb-12 px-4 md:px-8">
             <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full sage-gradient flex items-center justify-center text-white font-bold">V
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+              <div className="flex items-center gap-3 mb-4 px-4 md:px-8">
+                <div className="w-10 h-10 bg-white rounded flex items-center justify-center px-4 md:px-8">
+                  <span className="text-[#1a202c] font-bold text-xl px-4 md:px-8">A</span>
+                
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-                <span className="text-xl font-bold text-white">Studio Verdure</span>/
+    </div>
+                <span className="text-xl font-bold px-4 md:px-8">Atelier</span>
               
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-              <p className="text-sm leading-relaxed" style={{ color: '#b0b5bc' }>>Crafting beautiful, livable spaces since 2008.</p>/
+    </div>
+              <p className="text-[#a0aec0] text-sm px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>
+                Creating exceptional spaces that tell your story through thoughtful interior design.
+              </p>
             
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-            {[
-              { title: 'Services', links: ['Residential', 'Commercial', 'Kitchen & Bath', 'Color Consulting'] },
-              { title: 'Studio', links: ['About Us', 'Our Team', 'Careers', 'Press'] },
-              { title: 'Connect', links: ['Instagram', 'Pinterest', 'Houzz', 'Blog'] },
-            ].map((col) => (
-              <div key={col.title>>
-                <h4 className="text-white font-semibold mb-4">{col.title}</h4>/
-                <ul className="space-y-2">
-                  {col.links.map((link) => (
-                    <li key={link>><a href="#" className="text-sm transition-colors" style={{ color: '#b0b5bc' }>>{link}</a></li>
-                  ))}
-                </ul>/
-              
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-            ))}
-          
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
-
-    </div>/
-          <div className="border-t pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style={{ borderColor: '#374151' }>>
-            <p className="text-sm" style={{ color: '#8b9099' }>>© 2026 Studio Verdure. All rights reserved.</p>/
-            <div className="flex gap-6">
-              {['Privacy', 'Terms', 'Sitemap'].map((link) => (
-                <a key={link} href="#" className="text-sm transition-colors" style={{ color: '#8b9099' }>>{link}</a>/
-              ))}
+    </div>
+            <div>
+              <h3 className="font-semibold mb-4 px-4 md:px-8" style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", lineHeight: "1.4" }}>Services</h3>
+              <ul className="space-y-2 text-[#a0aec0] text-sm px-4 md:px-8">
+                <li><a href="#services" className="hover:text-white transition-colors px-4 md:px-8">Residential</a></li>
+                <li><a href="#services" className="hover:text-white transition-colors px-4 md:px-8">Commercial</a></li>
+                <li><a href="#services" className="hover:text-white transition-colors px-4 md:px-8">Hospitality</a></li>
+                <li><a href="#services" className="hover:text-white transition-colors px-4 md:px-8">Renovation</a></li>
+              </ul>
             
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
+            <div>
+              <h3 className="font-semibold mb-4 px-4 md:px-8" style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", lineHeight: "1.4" }}>Company</h3>
+              <ul className="space-y-2 text-[#a0aec0] text-sm px-4 md:px-8">
+                <li><a href="#portfolio" className="hover:text-white transition-colors px-4 md:px-8">Portfolio</a></li>
+                <li><a href="#team" className="hover:text-white transition-colors px-4 md:px-8">Our Team</a></li>
+                <li><a href="#testimonials" className="hover:text-white transition-colors px-4 md:px-8">Testimonials</a></li>
+                <li><a href="#contact" className="hover:text-white transition-colors px-4 md:px-8">Contact</a></li>
+              </ul>
+            
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+            <div>
+              <h3 className="font-semibold mb-4 px-4 md:px-8" style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", lineHeight: "1.4" }}>Affiliations</h3>
+              <ul className="space-y-2 text-[#a0aec0] text-sm px-4 md:px-8">
+                <li>ASID Member</li>
+                <li>NCIDQ Certified</li>
+                <li>IIDA Member</li>
+                <li>Best of Houzz</li>
+              </ul>
+            
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
           
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
+          <div className="border-t border-[#2d3748] pt-8 flex flex-col md:flex-row justify-between items-center gap-4 px-4 md:px-8">
+            <p className="text-[#a0aec0] text-sm px-4 md:px-8" style={{ fontSize: "1.125rem", lineHeight: "1.7", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>© 2024 Atelier Interiors. All rights reserved.</p>
+            <div className="flex gap-6 text-[#a0aec0] text-sm px-4 md:px-8">
+              <a href="#" className="hover:text-white transition-colors px-4 md:px-8">Privacy Policy</a>
+              <a href="#" className="hover:text-white transition-colors px-4 md:px-8">Terms of Service</a>
+            
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+          
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
         
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
-      </footer>/
+    </div>
+      </footer>
     
-      <section className="section reveal">
-        <div className="container" style={{ maxWidth: '800px' }>>
-          <h2 className="text-center" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem' }>>Frequently Asked Questions</h2>/
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }>>
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>How long does it take to build a website?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Most projects take 2-4 weeks from start to finish, depending on complexity. We'll provide a detailed timeline during our initial consultation.</p>'/
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>Do you offer ongoing maintenance?</summary>/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Yes! We offer monthly maintenance packages that include updates, security monitoring, and 24/7 support.</p>
-            </details>/
-            <details className="card" style={{ padding: '1.5rem' }>>
-              <summary style={{ fontWeight: 'bold', cursor: 'pointer' }>>What's included in your pricing?</summary>'/
-              <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6' }>>Our pricing includes design, development, content integration, SEO optimization, and 30 days of post-launch support.</p>/
-            </details>/
-          </div>/
-        </div>/
-      </section>/
+      <section style={{ padding: "5rem 1rem", background: "var(--primary)", color: "white", textAlign: "center" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Ready to Get Started?</h2>
+          <p style={{ fontSize: "1.25rem", marginBottom: "2rem", opacity: 0.9 }}>Contact us today to discuss your project and get a free consultation.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "white", color: "var(--primary)", border: "none", cursor: "pointer" }}>Get Free Quote</button>
+            <button style={{ padding: "1rem 2rem", fontSize: "1.125rem", fontWeight: "600", borderRadius: "0.5rem", background: "transparent", color: "white", border: "2px solid white", cursor: "pointer" }}>Schedule a Call</button>
+          </div>
+        </div>
+      </section>
 
-    </div>/
+    </div>
   );
 }

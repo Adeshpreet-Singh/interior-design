@@ -115,7 +115,7 @@ export default function InteriorDesign() {
     </div>
           <div className="hidden md:flex items-center gap-8">
             {['Services', 'Portfolio', 'Process', 'Awards', 'Testimonials', 'Contact'].map((item) => (
-              <a key={item} href={'#${item.toLowerCase()}'} className="text-sm transition-colors" style={{ color: '#8b9099' }}>{item}</a>
+              <a key={item} href={`#${item.toLowerCase(})}`} className="text-sm transition-colors" style={{ color: '#8b9099' }}>{item}</a>
             ))}
           
       <section className="section reveal">
@@ -541,7 +541,7 @@ export default function InteriorDesign() {
     </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {SERVICES.map((s, i) => (
-              <div key={s.name} className="scroll-reveal card-elegant rounded-2xl p-6 sage-border-top" style={{  transitionDelay: '${i * 100 }}ms' }}>
+              <div key={s.name} className="scroll-reveal card-elegant rounded-2xl p-6 sage-border-top" style={{  transitionDelay: `${i * 100} }}ms` }}>
                 <span className="text-4xl mb-4 block">{s.icon}</span>
                 <h3 className="text-xl font-bold mb-3" style={{ color: '#1a1a1a' }}>{s.name}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: '#8b9099' }}>{s.desc}</p>
@@ -666,7 +666,7 @@ export default function InteriorDesign() {
     </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {PORTFOLIO.map((p, i) => (
-              <div key={p.title} className="scroll-reveal gallery-item rounded-2xl overflow-hidden relative cursor-pointer" style={{  transitionDelay: '${i * 80 }}ms' }}>
+              <div key={p.title} className="scroll-reveal gallery-item rounded-2xl overflow-hidden relative cursor-pointer" style={{  transitionDelay: `${i * 80} }}ms` }}>
                 <img src={p.img} alt={p.title} className="w-full aspect-[4/3] object-cover" />
                 <div className="gallery-overlay absolute inset-0 flex flex-col justify-end p-6">
                   <span className="text-sm font-medium" style={{ color: '#a3c294' }}>{p.cat}</span>
@@ -814,7 +814,7 @@ export default function InteriorDesign() {
     </div>
           <div className="grid md:grid-cols-4 gap-8">
             {PROCESS.map((p, i) => (
-              <div key={p.step} className="scroll-reveal text-center" style={{  transitionDelay: '${i * 100 }}ms' }}>
+              <div key={p.step} className="scroll-reveal text-center" style={{  transitionDelay: `${i * 100} }}ms` }}>
                 <div className="w-16 h-16 rounded-full sage-gradient text-white text-xl font-bold flex items-center justify-center mx-auto mb-4">{p.step}
       <section className="section reveal">
         <div className="container" style={{ maxWidth: '800px' }}>
@@ -961,7 +961,7 @@ export default function InteriorDesign() {
     </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {MATERIALS.map((m, i) => (
-              <div key={i} className="scroll-reveal card-elegant rounded-2xl overflow-hidden" style={{  transitionDelay: '${i * 80 }}ms' }}>
+              <div key={i} className="scroll-reveal card-elegant rounded-2xl overflow-hidden" style={{  transitionDelay: `${i * 80} }}ms` }}>
                 <div className="h-40 overflow-hidden">
                   <img src={m.img} alt={m.name} className="w-full h-full object-cover gallery-item" />
                 
@@ -1132,7 +1132,7 @@ export default function InteriorDesign() {
     </div>
           <div className="grid md:grid-cols-2 gap-6">
             {AWARDS.map((a, i) => (
-              <div key={i} className="scroll-reveal card-elegant rounded-2xl p-6 flex items-center gap-6" style={{  transitionDelay: '${i * 80 }}ms' }}>
+              <div key={i} className="scroll-reveal card-elegant rounded-2xl p-6 flex items-center gap-6" style={{  transitionDelay: `${i * 80} }}ms` }}>
                 <div className="w-16 h-16 rounded-full sage-gradient flex items-center justify-center text-white font-bold flex-shrink-0">{a.year}
       <section className="section reveal">
         <div className="container" style={{ maxWidth: '800px' }}>
@@ -1359,7 +1359,7 @@ export default function InteriorDesign() {
     </div>
           <div className="grid md:grid-cols-3 gap-6">
             {TESTIMONIALS.map((t, i) => (
-              <div key={t.name} className="scroll-reveal card-elegant rounded-2xl p-8" style={{  transitionDelay: '${i * 100 }}ms' }}>
+              <div key={t.name} className="scroll-reveal card-elegant rounded-2xl p-8" style={{  transitionDelay: `${i * 100} }}ms` }}>
                 <div className="flex gap-1 mb-4">
                   {Array.from({ length: t.rating }).map((_, j) => (
                     <span key={j} style={{ color: '#87a878' }}>★</span>

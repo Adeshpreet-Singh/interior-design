@@ -1993,7 +1993,36 @@ export default function InteriorDesign() {
       </section>
 
       {/* Footer */}
-      <footer className="py-16 px-6" style={{ background: '#2c2c2c' }}>
+      
+      <section className="section reveal" style={ 
+        background: `linear-gradient(135deg, #7c3aed, #7c3aeddd)`,
+        color: 'white',
+        textAlign: 'center'
+      }>
+        <div className="container">
+          <h2 style={ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }>
+            Ready to Transform Your Business?
+          </h2>
+          <p style={ 
+            fontSize: '1.25rem', 
+            opacity: 0.9,
+            maxWidth: '600px',
+            margin: '0 auto 2.5rem'
+          }>
+            Join hundreds of satisfied clients who have achieved remarkable results with our design studio solutions.
+          </p>
+          <div style={ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }>
+            <button className="btn-primary btn-lg" style={ background: 'white', color: '#7c3aed' }>
+              Start Your Project Today
+            </button>
+            <button className="btn-secondary btn-lg" style={ borderColor: 'white', color: 'white' }>
+              Schedule a Call
+            </button>
+          </div>
+        </div>
+      </section>
+
+<footer className="py-16 px-6" style={{ background: '#2c2c2c' }}>
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div>

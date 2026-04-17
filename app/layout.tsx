@@ -2,8 +2,34 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Atelier Interiors | Premium Interior Design",
-  description: "Atelier Interiors creates exceptional spaces through residential, commercial, and hospitality interior design with a focus on timeless elegance and functionality.",
+  title: "Atelier Interiors | Premium Interior Design Studio",
+  description:
+    "Atelier Interiors creates exceptional spaces through residential, commercial, and hospitality interior design with timeless elegance and functionality.",
+  openGraph: {
+    title: "Atelier Interiors | Premium Interior Design Studio",
+    description:
+      "Exceptional living and working environments blending timeless elegance with modern functionality.",
+    url: "https://atelierinteriors.com",
+    siteName: "Atelier Interiors",
+    type: "website",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=80",
+        width: 1200,
+        height: 630,
+        alt: "Atelier Interiors - Beautifully designed living room",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Atelier Interiors | Premium Interior Design Studio",
+    description:
+      "Exceptional living and working environments blending timeless elegance with modern functionality.",
+    images: [
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=80",
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -13,21 +39,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="antialiased">
-      <body className="min-h-screen flex flex-col">{children}
-        <script dangerouslySetInnerHTML={{ __html: `
+      <body className="min-h-screen flex flex-col">
+        {children}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
           if (typeof window !== 'undefined') {
             const obs = new IntersectionObserver((entries) => {
               entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
             }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
             document.addEventListener('DOMContentLoaded', () => {
-              document.querySelectorAll('.reveal,.reveal-left,.reveal-scale').forEach(el => obs.observe(el));
+              document.querySelectorAll('.int-reveal').forEach(el => obs.observe(el));
             });
             const mo = new MutationObserver(() => {
-              document.querySelectorAll('.reveal:not(.visible),.reveal-left:not(.visible),.reveal-scale:not(.visible)').forEach(el => obs.observe(el));
+              document.querySelectorAll('.int-reveal:not(.visible)').forEach(el => obs.observe(el));
             });
             mo.observe(document.body, { childList: true, subtree: true });
           }
-        ` }} />
+        `,
+          }}
+        />
       </body>
     </html>
   );

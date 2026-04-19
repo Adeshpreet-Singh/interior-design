@@ -17,7 +17,7 @@ export default function Home() {
  { title: '3D Visualization', desc: 'Photorealistic renderings to preview your space before construction.', icon: '📐' },
  ];
 
- const process = [
+ const designProcess = [
  { step: '01', title: 'Discovery', desc: 'We begin with a complimentary consultation to understand your vision, lifestyle, and budget.' },
  { step: '02', title: 'Concept', desc: 'Our team develops mood boards, material palettes, and spatial concepts for your approval.' },
  { step: '03', title: 'Design', desc: 'Detailed floor plans, 3D renderings, and specifications bring your vision to life.' },
@@ -88,7 +88,7 @@ export default function Home() {
  <header className="int-nav">
  <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
  <a href="#" className="flex items-center gap-2 no-underline">
- <div className="w-9 h-9 rounded-lg flex items-center justify-center">
+ <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-[var(--sage-deep)]">
  <span className="text-white font-bold text-lg">A</span>
  </div>
  <div>
@@ -157,7 +157,7 @@ export default function Home() {
  alt="Beautifully designed living room with natural light"
  className="rounded-2xl shadow-lg"
  />
- <div className="absolute -bottom-6 -left-6 p-4 rounded-xl">
+ <div className="absolute -bottom-6 -left-6 p-4 rounded-xl bg-[var(--cream)] shadow-lg">
  <div className="text-3xl font-bold">300+</div>
  <div className="text-sm">Spaces Transformed</div>
  </div>
@@ -233,7 +233,7 @@ export default function Home() {
  <p className="int-body mt-4 max-w-2xl mx-auto">A proven four-step approach that turns your vision into reality.</p>
  </div>
  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
- {process.map((p, i) => (
+ {designProcess.map((p, i) => (
  <div key={i} className="int-reveal text-center">
  <div className="text-5xl font-extralight mb-4">{p.step}</div>
  <h3 className="int-subheading text-lg mb-2">{p.title}</h3>
@@ -340,7 +340,7 @@ export default function Home() {
  </section>
 
  {/* ===== CTA BANNER ===== */}
- <section className="py-20 text-center">
+ <section className="py-20 text-center int-section-alt">
  <div className="max-w-3xl mx-auto px-6 int-reveal">
  <h2 className="text-3xl lg:text-4xl font-bold mb-4">Ready to Transform Your Space?</h2>
  <p className="text-lg mb-8">Book a complimentary consultation and let us bring your vision to life.</p>
@@ -528,12 +528,12 @@ export default function Home() {
  </section>
 
  {/* ===== FOOTER ===== */}
- <footer className="py-12">
+ <footer className="py-12" style={{ background: 'var(--charcoal)', color: 'var(--sage-muted)' }}>
  <div className="max-w-7xl mx-auto px-6">
  <div className="grid md:grid-cols-4 gap-8 mb-8">
  <div>
  <div className="flex items-center gap-2 mb-4">
- <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+ <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-[var(--sage-deep)]">
  <span className="text-white font-bold">A</span>
  </div>
  <span className="text-white font-bold text-lg">Atelier Interiors</span>
@@ -578,7 +578,7 @@ export default function Home() {
  target="_blank"
  rel="noopener noreferrer"
  aria-label="Chat on WhatsApp"
- className="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50"
+ className="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50 bg-[var(--sage-deep)] text-white"
 
  >
  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">

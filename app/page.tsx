@@ -312,7 +312,7 @@ export default function Home() {
 
  {/* ===== FAQ ===== */}
  <section className="int-section int-section-alt">
- <div className="max-w-3xl mx-auto px-6">
+ <div className="max-w-7xl mx-auto px-6">
  <div className="text-center mb-12 int-reveal">
  <span className="int-label">Questions</span>
  <h2 className="int-heading text-3xl lg:text-4xl mt-3">Frequently Asked</h2>
@@ -341,7 +341,7 @@ export default function Home() {
 
  {/* ===== CTA BANNER ===== */}
  <section className="py-20 text-center int-section-alt">
- <div className="max-w-3xl mx-auto px-6 int-reveal">
+ <div className="max-w-7xl mx-auto px-6 int-reveal">
  <h2 className="text-3xl lg:text-4xl font-bold mb-4">Ready to Transform Your Space?</h2>
  <p className="text-lg mb-8">Book a complimentary consultation and let us bring your vision to life.</p>
  <div className="flex flex-col sm:flex-row gap-4 justify-center">

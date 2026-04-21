@@ -169,7 +169,7 @@ export default function Home() {
  {/* ===== TRUST BAR ===== */}
  <section className="py-8">
  <div className=" section-container">
- <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16">
+ <div className="flex flex-wrap gap-4 justify-center items-center gap-8 lg:gap-16">
  {[
  { icon: '★', label: 'ASID Member' },
  { icon: '✓', label: 'NCIDQ Certified' },
@@ -188,7 +188,7 @@ export default function Home() {
  {/* ===== STATS ===== */}
  <section className="py-16 int-section-wash">
  <div className=" section-container">
- <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+ <div className="grid grid-cols-2 gap-6 lg:grid-cols-4 gap-8">
  {[
  { num: '300+', label: 'Projects Completed' },
  { num: '25', label: 'Design Awards' },
@@ -212,7 +212,7 @@ export default function Home() {
  <h2 className="int-heading text-3xl lg:text-4xl mt-3">Our Services</h2>
  <p className="int-body mt-4 max-w-2xl mx-auto">Comprehensive interior design solutions for every space and every vision.</p>
  </div>
- <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+ <div className="grid md:grid-cols-2 gap-6 lg:grid-cols-3 gap-6">
  {services.map((s, i) => (
  <div key={i} className="int-card int-reveal">
  <span className="text-3xl mb-4 block">{s.icon}</span>
@@ -232,7 +232,7 @@ export default function Home() {
  <h2 className="int-heading text-3xl lg:text-4xl mt-3">Design Process</h2>
  <p className="int-body mt-4 max-w-2xl mx-auto">A proven four-step approach that turns your vision into reality.</p>
  </div>
- <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+ <div className="grid md:grid-cols-2 gap-6 lg:grid-cols-4 gap-8">
  {designProcess.map((p, i) => (
  <div key={i} className="int-reveal text-center">
  <div className="text-5xl font-extralight mb-4">{p.step}</div>
@@ -275,7 +275,7 @@ export default function Home() {
  <h2 className="int-heading text-3xl lg:text-4xl mt-3">Meet the Team</h2>
  <p className="int-body mt-4 max-w-2xl mx-auto">Passionate designers dedicated to transforming your space.</p>
  </div>
- <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+ <div className="grid md:grid-cols-2 gap-6 lg:grid-cols-4 gap-8">
  {team.map((m, i) => (
  <div key={i} className="int-reveal text-center">
  <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">

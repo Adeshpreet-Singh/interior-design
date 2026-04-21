@@ -86,7 +86,7 @@ export default function Home() {
 
  {/* ===== HEADER ===== */}
  <header className="int-nav">
- <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+ <div className=" section-container">
  <a href="#" className="flex items-center gap-2 no-underline">
  <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-[var(--sage-deep)]">
  <span className="text-white font-bold text-lg">A</span>
@@ -120,7 +120,7 @@ export default function Home() {
 
  {menuOpen && (
  <nav className="md:hidden py-4 border-t" aria-label="Mobile navigation">
- <div className="max-w-7xl mx-auto px-6 flex flex-col gap-4">
+ <div className=" section-container">
  <a href="#services" className="int-nav-link" onClick={() => setMenuOpen(false)}>Services</a>
  <a href="#process" className="int-nav-link" onClick={() => setMenuOpen(false)}>Process</a>
  <a href="#portfolio" className="int-nav-link" onClick={() => setMenuOpen(false)}>Portfolio</a>
@@ -136,7 +136,7 @@ export default function Home() {
  <section className="int-hero">
  <div className="int-organic-shape"></div>
  <div className="int-leaf"></div>
- <div className="max-w-7xl mx-auto px-6">
+ <div className=" section-container">
  <div className="grid lg:grid-cols-2 gap-12 items-center">
  <div className="int-reveal">
  <span className="int-badge mb-6 inline-block">Award-Winning Design Studio</span>
@@ -168,7 +168,7 @@ export default function Home() {
 
  {/* ===== TRUST BAR ===== */}
  <section className="py-8">
- <div className="max-w-7xl mx-auto px-6">
+ <div className=" section-container">
  <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16">
  {[
  { icon: '★', label: 'ASID Member' },
@@ -187,7 +187,7 @@ export default function Home() {
 
  {/* ===== STATS ===== */}
  <section className="py-16 int-section-wash">
- <div className="max-w-7xl mx-auto px-6">
+ <div className=" section-container">
  <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
  {[
  { num: '300+', label: 'Projects Completed' },
@@ -206,7 +206,7 @@ export default function Home() {
 
  {/* ===== SERVICES ===== */}
  <section id="services" className="int-section">
- <div className="max-w-7xl mx-auto px-6">
+ <div className=" section-container">
  <div className="text-center mb-16 int-reveal">
  <span className="int-label">What We Do</span>
  <h2 className="int-heading text-3xl lg:text-4xl mt-3">Our Services</h2>
@@ -226,7 +226,7 @@ export default function Home() {
 
  {/* ===== DESIGN PROCESS ===== */}
  <section id="process" className="int-section int-section-alt">
- <div className="max-w-7xl mx-auto px-6">
+ <div className=" section-container">
  <div className="text-center mb-16 int-reveal">
  <span className="int-label">How We Work</span>
  <h2 className="int-heading text-3xl lg:text-4xl mt-3">Design Process</h2>
@@ -246,7 +246,7 @@ export default function Home() {
 
  {/* ===== PORTFOLIO ===== */}
  <section id="portfolio" className="int-section">
- <div className="max-w-7xl mx-auto px-6">
+ <div className=" section-container">
  <div className="text-center mb-16 int-reveal">
  <span className="int-label">Our Work</span>
  <h2 className="int-heading text-3xl lg:text-4xl mt-3">Featured Projects</h2>
@@ -269,7 +269,7 @@ export default function Home() {
 
  {/* ===== TEAM ===== */}
  <section id="team" className="int-section int-section-alt">
- <div className="max-w-7xl mx-auto px-6">
+ <div className=" section-container">
  <div className="text-center mb-16 int-reveal">
  <span className="int-label">Who We Are</span>
  <h2 className="int-heading text-3xl lg:text-4xl mt-3">Meet the Team</h2>
@@ -291,7 +291,7 @@ export default function Home() {
 
  {/* ===== TESTIMONIALS ===== */}
  <section id="testimonials" className="int-section">
- <div className="max-w-7xl mx-auto px-6">
+ <div className=" section-container">
  <div className="text-center mb-16 int-reveal">
  <span className="int-label">Client Stories</span>
  <h2 className="int-heading text-3xl lg:text-4xl mt-3">What Our Clients Say</h2>
@@ -312,7 +312,7 @@ export default function Home() {
 
  {/* ===== FAQ ===== */}
  <section className="int-section int-section-alt">
- <div className="max-w-7xl mx-auto px-6">
+ <div className=" section-container">
  <div className="text-center mb-12 int-reveal">
  <span className="int-label">Questions</span>
  <h2 className="int-heading text-3xl lg:text-4xl mt-3">Frequently Asked</h2>
@@ -341,7 +341,7 @@ export default function Home() {
 
  {/* ===== CTA BANNER ===== */}
  <section className="py-20 text-center int-section-alt">
- <div className="max-w-7xl mx-auto px-6 int-reveal">
+ <div className=" section-container">
  <h2 className="text-3xl lg:text-4xl font-bold mb-4">Ready to Transform Your Space?</h2>
  <p className="text-lg mb-8">Book a complimentary consultation and let us bring your vision to life.</p>
  <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -353,7 +353,7 @@ export default function Home() {
 
  {/* ===== CONTACT ===== */}
  <section id="contact" className="int-section">
- <div className="max-w-7xl mx-auto px-6">
+ <div className=" section-container">
  <div className="text-center mb-16 int-reveal">
  <span className="int-label">Get in Touch</span>
  <h2 className="int-heading text-3xl lg:text-4xl mt-3">Book a Consultation</h2>
@@ -529,7 +529,7 @@ export default function Home() {
 
  {/* ===== FOOTER ===== */}
  <footer className="py-12" style={{ background: 'var(--charcoal)', color: 'var(--sage-muted)' }}>
- <div className="max-w-7xl mx-auto px-6">
+ <div className=" section-container">
  <div className="grid md:grid-cols-4 gap-8 mb-8">
  <div>
  <div className="flex items-center gap-2 mb-4">

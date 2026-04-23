@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: "Atelier Interiors | Premium Interior Design Studio",
     description:
       "Exceptional living and working environments blending timeless elegance with modern functionality.",
-    url: "https://atelierinteriors.com",
+    url: "[WEBSITE]",
     siteName: "Atelier Interiors",
     type: "website",
     images: [

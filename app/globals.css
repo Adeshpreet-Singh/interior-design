@@ -1,25 +1,29 @@
+:root {
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+  --bg-canvas: #fdf2f8;
+  --bg-panel: #ffffff;
+  --bg-elevated: #fdf2f8;
+  --text-primary: #2d0a1e;
+  --text-secondary: #9d6b84;
+  --text-tertiary: #9d6b84;
+  --accent-brand: #fbbf24;
+  --accent-interactive: #db2777;
+  --surface-translucent: rgba(255,255,255,0.08);
+  --surface-translucent-hover: rgba(255,255,255,0.12);
+  --surface-translucent-active: rgba(255,255,255,0.16);
+  --border-default: rgba(0,0,0,0.1);
+  --border-subtle: rgba(0,0,0,0.05);
+  --border-hover: rgba(0,0,0,0.2);
+}
 /* FONTS_INJECTED */
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap");
-:root {
-  --font-heading: 'Playfair Display', serif;
-  --font-body: 'Inter', sans-serif;
-}
 h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
 body { font-family: var(--font-body); }
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 @import "tailwindcss";
-
-:root {
-  --primary: #be185d;
-  --secondary: #db2777;
-  --accent: #fbbf24;
-  --bg: #fdf2f8;
-  --surface: #ffffff;
-  --text: #2d0a1e;
-  --muted: #9d6b84;
-}
 
 /* === BASE === */
 html { scroll-behavior: smooth; overflow-x: hidden; }

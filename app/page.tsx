@@ -11,7 +11,7 @@ export default function Home() {
  const services = [
  { title: 'Residential Design', desc: 'Full-service interior design for homes, apartments, and private residences.', icon: '' },
  { title: 'Commercial Spaces', desc: 'Offices, retail environments, and corporate interiors that inspire.', icon: '' },
- { title: 'Hospitality Design', desc: 'Hotels, restaurants, and bars with unforgettable atmospheres.', icon: '✨' },
+ { title: 'Hospitality Design', desc: 'Hotels, restaurants, and bars with unforgettable atmospheres.', icon: '' },
  { title: 'Renovation', desc: 'Complete interior transformations and thoughtful space reimagining.', icon: '' },
  { title: 'Styling & Staging', desc: 'Furniture selection, art curation, and finishing touches.', icon: '' },
  { title: '3D Visualization', desc: 'Photorealistic renderings to preview your space before construction.', icon: '' },
@@ -61,7 +61,7 @@ export default function Home() {
  method: 'POST',
  headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
  body: JSON.stringify({
- access_key: 'YOUR_WEB3FORMS_ACCESS_KEY',
+ access_key: '[WEB3FORMS_KEY]',
  name: formData.name,
  email: formData.email,
  phone: formData.phone,
@@ -171,10 +171,10 @@ export default function Home() {
  <div className=" section-container">
  <div className="flex flex-wrap gap-4 justify-center items-center gap-8 lg:gap-16">
  {[
- { icon: '★', label: 'ASID Member' },
- { icon: '✓', label: 'NCIDQ Certified' },
- { icon: '♥', label: 'Best of Houzz 2024' },
- { icon: '◷', label: '15 Years Experience' },
+ { icon: '', label: 'ASID Member' },
+ { icon: '', label: 'NCIDQ Certified' },
+ { icon: '', label: 'Best of Houzz 2024' },
+ { icon: '', label: '15 Years Experience' },
  ].map((t, i) => (
  <div key={i} className="flex items-center gap-2">
  <span className="text-lg">{t.icon}</span>
@@ -346,7 +346,7 @@ export default function Home() {
  <p className="text-lg mb-8">Book a complimentary consultation and let us bring your vision to life.</p>
  <div className="flex flex-col sm:flex-row gap-4 justify-center">
  <a href="#contact" className="int-btn">Get Free Consultation</a>
- <a href="tel:+14155551234" className="int-btn-outline">Call (415) 555-1234</a>
+ <a href="tel:[PHONE]" className="int-btn-outline">Call [PHONE]</a>
  </div>
  </div>
  </section>
@@ -384,7 +384,7 @@ export default function Home() {
  type="email"
  name="email"
  className="int-input"
- placeholder="your@email.com"
+ placeholder="[EMAIL]"
  value={formData.email}
  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
  required
@@ -397,7 +397,7 @@ export default function Home() {
  type="tel"
  name="phone"
  className="int-input"
- placeholder="(415) 555-1234"
+ placeholder="[PHONE]"
  value={formData.phone}
  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
  />
@@ -438,16 +438,16 @@ export default function Home() {
  <div>
  <h3 className="int-subheading text-lg mb-4">Contact Information</h3>
  <div className="space-y-4">
- <a href="mailto:hello@atelierinteriors.com" className="flex items-center gap-3 int-nav-link">
- <span>✉</span>
- hello@atelierinteriors.com
+ <a href="mailto:[EMAIL]" className="flex items-center gap-3 int-nav-link">
+ <span></span>
+ [EMAIL]
  </a>
- <a href="tel:+14155551234" className="flex items-center gap-3 int-nav-link">
- <span>☎</span>
- (415) 555-1234
+ <a href="tel:[PHONE]" className="flex items-center gap-3 int-nav-link">
+ <span></span>
+ [PHONE]
  </a>
  <a
- href="https://wa.me/14155551234?text=Hi%20Atelier%20Interiors%2C%20I%27d%20like%20to%20book%20a%20consultation."
+ href="https://wa.me/[PHONE]?text=Hi%20Atelier%20Interiors%2C%20I%27d%20like%20to%20book%20a%20consultation."
  target="_blank"
  rel="noopener noreferrer"
  className="flex items-center gap-3 int-nav-link"
@@ -486,7 +486,7 @@ export default function Home() {
  <h3 className="int-subheading text-lg mb-4">Follow Us</h3>
  <div className="flex gap-4">
  <a
- href="https://instagram.com/atelierinteriors"
+ href="[INSTAGRAM_URL]"
  target="_blank"
  rel="noopener noreferrer"
  className="int-btn-outline"
@@ -495,7 +495,7 @@ export default function Home() {
  Instagram
  </a>
  <a
- href="https://pinterest.com/atelierinteriors"
+ href="[PINTEREST_URL]"
  target="_blank"
  rel="noopener noreferrer"
  className="int-btn-outline"
@@ -511,7 +511,7 @@ export default function Home() {
  <h3 className="int-subheading text-lg mb-4">Find Us</h3>
  <div className="rounded-xl overflow-hidden">
  <iframe
- src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0977837983904!2d-122.41941568468204!3d37.77492997975892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c6c8f4459%3A0xb10ed6d9b5050fa5!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+ src="[WEBSITE]/maps/embed?pb=!1m18!1m12!1m3!1d3153.0977837983904!2d-122.41941568468204!3d37.77492997975892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c6c8f4459%3A0xb10ed6d9b5050fa5!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
  width="100%"
  height="250"
 
@@ -552,29 +552,30 @@ export default function Home() {
  <div>
  <h4 className="text-white font-semibold mb-4 text-sm">Contact</h4>
  <div className="space-y-2 text-sm">
- <a href="mailto:hello@atelierinteriors.com" className="block">hello@atelierinteriors.com</a>
- <a href="tel:+14155551234" className="block">(415) 555-1234</a>
+ <a href="mailto:[EMAIL]" className="block">[EMAIL]</a>
+ <a href="tel:[PHONE]" className="block">[PHONE]</a>
  <p>456 Design Avenue, Suite 200<br />San Francisco, CA 94102</p>
  </div>
  </div>
  <div>
  <h4 className="text-white font-semibold mb-4 text-sm">Social</h4>
  <div className="space-y-2 text-sm">
- <a href="https://instagram.com/atelierinteriors" target="_blank" rel="noopener noreferrer" className="block">Instagram</a>
- <a href="https://pinterest.com/atelierinteriors" target="_blank" rel="noopener noreferrer" className="block">Pinterest</a>
- <a href="https://wa.me/14155551234" target="_blank" rel="noopener noreferrer" className="block">WhatsApp</a>
+ <a href="[INSTAGRAM_URL]" target="_blank" rel="noopener noreferrer" className="block">Instagram</a>
+ <a href="[PINTEREST_URL]" target="_blank" rel="noopener noreferrer" className="block">Pinterest</a>
+ <a href="https://wa.me/[PHONE]" target="_blank" rel="noopener noreferrer" className="block">WhatsApp</a>
  </div>
  </div>
  </div>
  <div className="pt-8 text-center text-sm">
  <p>&copy; {new Date().getFullYear()} Atelier Interiors. All rights reserved.</p>
+<div className="text-center py-3 text-xs opacity-50 hover:opacity-80 transition-opacity"><span>Designed by </span><a href="https://adeshpreet.vercel.app/" target="_blank" rel="noopener noreferrer" className="underline">Adeshpreet Singh</a></div>
  </div>
  </div>
  </footer>
 
  {/* ===== FLOATING WHATSAPP BUTTON ===== */}
  <a
- href="https://wa.me/14155551234?text=Hi%20Atelier%20Interiors%2C%20I%27d%20like%20to%20book%20a%20consultation."
+ href="https://wa.me/[PHONE]?text=Hi%20Atelier%20Interiors%2C%20I%27d%20like%20to%20book%20a%20consultation."
  target="_blank"
  rel="noopener noreferrer"
  aria-label="Chat on WhatsApp"

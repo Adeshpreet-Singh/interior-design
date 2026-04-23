@@ -9,12 +9,12 @@ export default function Home() {
  const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
  const services = [
- { title: 'Residential Design', desc: 'Full-service interior design for homes, apartments, and private residences.', icon: '🏠' },
- { title: 'Commercial Spaces', desc: 'Offices, retail environments, and corporate interiors that inspire.', icon: '🏢' },
+ { title: 'Residential Design', desc: 'Full-service interior design for homes, apartments, and private residences.', icon: '' },
+ { title: 'Commercial Spaces', desc: 'Offices, retail environments, and corporate interiors that inspire.', icon: '' },
  { title: 'Hospitality Design', desc: 'Hotels, restaurants, and bars with unforgettable atmospheres.', icon: '✨' },
- { title: 'Renovation', desc: 'Complete interior transformations and thoughtful space reimagining.', icon: '🔨' },
- { title: 'Styling & Staging', desc: 'Furniture selection, art curation, and finishing touches.', icon: '🪑' },
- { title: '3D Visualization', desc: 'Photorealistic renderings to preview your space before construction.', icon: '📐' },
+ { title: 'Renovation', desc: 'Complete interior transformations and thoughtful space reimagining.', icon: '' },
+ { title: 'Styling & Staging', desc: 'Furniture selection, art curation, and finishing touches.', icon: '' },
+ { title: '3D Visualization', desc: 'Photorealistic renderings to preview your space before construction.', icon: '' },
  ];
 
  const designProcess = [
@@ -452,7 +452,7 @@ export default function Home() {
  rel="noopener noreferrer"
  className="flex items-center gap-3 int-nav-link"
  >
- <span>💬</span>
+ <span></span>
  Chat on WhatsApp
  </a>
  <div className="flex items-center gap-3">

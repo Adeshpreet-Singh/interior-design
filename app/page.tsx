@@ -346,7 +346,7 @@ export default function Home() {
  <p className="text-lg mb-8">Book a complimentary consultation and let us bring your vision to life.</p>
  <div className="flex flex-col sm:flex-row gap-4 justify-center">
  <a href="#contact" className="int-btn">Get Free Consultation</a>
- <a href="tel:[PHONE]" className="int-btn-outline">Call [PHONE]</a>
+ <a href="tel:+91 98765 43210" className="int-btn-outline">Call +91 98765 43210</a>
  </div>
  </div>
  </section>
@@ -397,7 +397,7 @@ export default function Home() {
  type="tel"
  name="phone"
  className="int-input"
- placeholder="[PHONE]"
+ placeholder="+91 98765 43210"
  value={formData.phone}
  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
  />
@@ -442,12 +442,12 @@ export default function Home() {
  <span></span>
  [EMAIL]
  </a>
- <a href="tel:[PHONE]" className="flex items-center gap-3 int-nav-link">
+ <a href="tel:+91 98765 43210" className="flex items-center gap-3 int-nav-link">
  <span></span>
- [PHONE]
+ +91 98765 43210
  </a>
  <a
- href="https://wa.me/[PHONE]?text=Hi%20Atelier%20Interiors%2C%20I%27d%20like%20to%20book%20a%20consultation."
+ href="https://wa.me/+91 98765 43210?text=Hi%20Atelier%20Interiors%2C%20I%27d%20like%20to%20book%20a%20consultation."
  target="_blank"
  rel="noopener noreferrer"
  className="flex items-center gap-3 int-nav-link"
@@ -553,7 +553,7 @@ export default function Home() {
  <h4 className="text-white font-semibold mb-4 text-sm">Contact</h4>
  <div className="space-y-2 text-sm">
  <a href="mailto:[EMAIL]" className="block">[EMAIL]</a>
- <a href="tel:[PHONE]" className="block">[PHONE]</a>
+ <a href="tel:+91 98765 43210" className="block">+91 98765 43210</a>
  <p>456 Design Avenue, Suite 200<br />San Francisco, CA 94102</p>
  </div>
  </div>
@@ -562,7 +562,7 @@ export default function Home() {
  <div className="space-y-2 text-sm">
  <a href="[INSTAGRAM_URL]" target="_blank" rel="noopener noreferrer" className="block">Instagram</a>
  <a href="[PINTEREST_URL]" target="_blank" rel="noopener noreferrer" className="block">Pinterest</a>
- <a href="https://wa.me/[PHONE]" target="_blank" rel="noopener noreferrer" className="block">WhatsApp</a>
+ <a href="https://wa.me/+91 98765 43210" target="_blank" rel="noopener noreferrer" className="block">WhatsApp</a>
  </div>
  </div>
  </div>
@@ -575,7 +575,7 @@ export default function Home() {
 
  {/* ===== FLOATING WHATSAPP BUTTON ===== */}
  <a
- href="https://wa.me/[PHONE]?text=Hi%20Atelier%20Interiors%2C%20I%27d%20like%20to%20book%20a%20consultation."
+ href="https://wa.me/+91 98765 43210?text=Hi%20Atelier%20Interiors%2C%20I%27d%20like%20to%20book%20a%20consultation."
  target="_blank"
  rel="noopener noreferrer"
  aria-label="Chat on WhatsApp"

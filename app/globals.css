@@ -15,6 +15,16 @@
   --border-default: rgba(0,0,0,0.1);
   --border-subtle: rgba(0,0,0,0.05);
   --border-hover: rgba(0,0,0,0.2);
+  --charcoal: initial;
+  --cream: #f5f0e8;
+  --font-primary: system-ui, sans-serif;
+  --linen: #f0ebe0;
+  --sage: #87a878;
+  --sage-deep: #6b8a5e;
+  --sage-muted: #9ab08e;
+  --sage-wash: #e8f0e4;
+  --shadow-medium: 0 4px 6px rgba(0,0,0,0.1);
+  --stone: initial;
 }
 /* FONTS_INJECTED */
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap");

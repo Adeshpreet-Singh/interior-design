@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=80",
+        url: "/images/photo-1600210492486-724fe5c67fb0.jpg",
         width: 1200,
         height: 630,
         alt: "Atelier Interiors - Beautifully designed living room",
@@ -27,9 +27,14 @@ export const metadata: Metadata = {
     description:
       "Exceptional living and working environments blending timeless elegance with modern functionality.",
     images: [
-      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=80",
+      "/images/photo-1600210492486-724fe5c67fb0.jpg",
     ],
   },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -39,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="antialiased">
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-[100dvh] flex flex-col">
         {children}
         <script
           dangerouslySetInnerHTML={{

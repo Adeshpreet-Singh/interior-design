@@ -87,7 +87,7 @@ export default function Home() {
  {/* ===== HEADER ===== */}
  <header className="int-nav">
  <div className=" section-container">
- <a href="#" className="flex items-center gap-2 no-underline">
+ <a href="/contact" className="flex items-center gap-2 no-underline">
  <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-[var(--sage-deep)]">
  <span className="text-white font-bold text-lg">A</span>
  </div>

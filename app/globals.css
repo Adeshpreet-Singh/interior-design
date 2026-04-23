@@ -1,22 +1,24 @@
+/* FONTS_INJECTED */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap");
+:root {
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+}
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
+body { font-family: var(--font-body); }
+
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 @import "tailwindcss";
 
 :root {
-  --sage: #87a878;
-  --sage-deep: #5d7a4f;
-  --sage-light: #a8c49a;
-  --sage-muted: #c5d9bc;
-  --sage-wash: #f0f5ed;
-  --cream: #fefdf9;
-  --linen: #faf8f5;
-  --sand: #f5f3ef;
-  --stone: #5c5752;
-  --charcoal: #2d2d2d;
-  --shadow-soft: 0 4px 20px rgba(135,168,120,0.08);
-  --shadow-medium: 0 10px 40px rgba(135,168,120,0.12);
-  --shadow-lift: 0 20px 60px rgba(135,168,120,0.15);
-  --font-primary: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --primary: #be185d;
+  --secondary: #db2777;
+  --accent: #fbbf24;
+  --bg: #fdf2f8;
+  --surface: #ffffff;
+  --text: #2d0a1e;
+  --muted: #9d6b84;
 }
 
 /* === BASE === */
@@ -497,3 +499,14 @@ section, .section { margin-bottom: 0; }
 .vt-md { margin-top: 2.5rem; margin-bottom: 2.5rem; }
 .vt-lg { margin-top: 4rem; margin-bottom: 4rem; }
 .vt-xl { margin-top: 5rem; margin-bottom: 5rem; }
+
+/* DESIGN_SYSTEM_INJECTED */
+body {
+  background-color: #fdf2f8;
+  color: #2d0a1e;
+}
+.bg-primary { background-color: #be185d !important; }
+.bg-secondary { background-color: #db2777 !important; }
+.text-primary { color: #be185d !important; }
+.text-accent { color: #fbbf24 !important; }
+.bg-accent { background-color: #fbbf24 !important; }

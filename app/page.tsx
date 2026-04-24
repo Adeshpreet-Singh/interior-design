@@ -61,7 +61,7 @@ export default function Home() {
  method: 'POST',
  headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
  body: JSON.stringify({
- access_key: '[WEB3FORMS_KEY]',
+ access_key: '00000000-0000-0000-0000-000000000000',
  name: formData.name,
  email: formData.email,
  phone: formData.phone,
@@ -346,7 +346,7 @@ export default function Home() {
  <p className="text-lg mb-8">Book a complimentary consultation and let us bring your vision to life.</p>
  <div className="flex flex-col sm:flex-row gap-4 justify-center">
  <a href="#contact" className="int-btn">Get Free Consultation</a>
- <a href="tel:+91 98765 43210" className="int-btn-outline">Call +91 98765 43210</a>
+ <a href="tel:+1-800-555-0370" className="int-btn-outline">Call +1-800-555-0370</a>
  </div>
  </div>
  </section>
@@ -384,7 +384,7 @@ export default function Home() {
  type="email"
  name="email"
  className="int-input"
- placeholder="[EMAIL]"
+ placeholder="info@interiordesign.com"
  value={formData.email}
  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
  required
@@ -397,7 +397,7 @@ export default function Home() {
  type="tel"
  name="phone"
  className="int-input"
- placeholder="+91 98765 43210"
+ placeholder="+1-800-555-0370"
  value={formData.phone}
  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
  />
@@ -438,16 +438,16 @@ export default function Home() {
  <div>
  <h3 className="int-subheading text-lg mb-4">Contact Information</h3>
  <div className="space-y-4">
- <a href="mailto:[EMAIL]" className="flex items-center gap-3 int-nav-link">
+ <a href="mailto:info@interiordesign.com" className="flex items-center gap-3 int-nav-link">
  <span></span>
- [EMAIL]
+ info@interiordesign.com
  </a>
- <a href="tel:+91 98765 43210" className="flex items-center gap-3 int-nav-link">
+ <a href="tel:+1-800-555-0370" className="flex items-center gap-3 int-nav-link">
  <span></span>
- +91 98765 43210
+ +1-800-555-0370
  </a>
  <a
- href="https://wa.me/+91 98765 43210?text=Hi%20Atelier%20Interiors%2C%20I%27d%20like%20to%20book%20a%20consultation."
+ href="https://wa.me/+1-800-555-0370?text=Hi%20Atelier%20Interiors%2C%20I%27d%20like%20to%20book%20a%20consultation."
  target="_blank"
  rel="noopener noreferrer"
  className="flex items-center gap-3 int-nav-link"
@@ -543,8 +543,8 @@ export default function Home() {
  <div>
  <h4 className="text-white font-semibold mb-4 text-sm">Contact</h4>
  <div className="space-y-2 text-sm">
- <a href="mailto:[EMAIL]" className="block">[EMAIL]</a>
- <a href="tel:+91 98765 43210" className="block">+91 98765 43210</a>
+ <a href="mailto:info@interiordesign.com" className="block">info@interiordesign.com</a>
+ <a href="tel:+1-800-555-0370" className="block">+1-800-555-0370</a>
  <p>456 Design Avenue, Suite 200<br />San Francisco, CA 94102</p>
  </div>
  </div>
@@ -553,12 +553,12 @@ export default function Home() {
  <div className="space-y-2 text-sm">
  <a href="[INSTAGRAM_URL]" target="_blank" rel="noopener noreferrer" className="block">Instagram</a>
  <a href="[PINTEREST_URL]" target="_blank" rel="noopener noreferrer" className="block">Pinterest</a>
- <a href="https://wa.me/+91 98765 43210" target="_blank" rel="noopener noreferrer" className="block">WhatsApp</a>
+ <a href="https://wa.me/+1-800-555-0370" target="_blank" rel="noopener noreferrer" className="block">WhatsApp</a>
  </div>
  </div>
  </div>
  <div className="pt-8 text-center text-sm">
- <p>&copy; {new Date().getFullYear()} Atelier Interiors. All rights reserved.</p>
+ <p>© {new Date().getFullYear()} Atelier Interiors. All rights reserved.</p>
 <div className="text-center py-3 text-xs opacity-50 hover:opacity-80 transition-opacity"><span>Designed by </span><a href="https://adeshpreet.vercel.app/" target="_blank" rel="noopener noreferrer" className="underline">Adeshpreet Singh</a></div>
  </div>
  </div>
@@ -566,7 +566,7 @@ export default function Home() {
 
  {/* ===== FLOATING WHATSAPP BUTTON ===== */}
  <a
- href="https://wa.me/+91 98765 43210?text=Hi%20Atelier%20Interiors%2C%20I%27d%20like%20to%20book%20a%20consultation."
+ href="https://wa.me/+1-800-555-0370?text=Hi%20Atelier%20Interiors%2C%20I%27d%20like%20to%20book%20a%20consultation."
  target="_blank"
  rel="noopener noreferrer"
  aria-label="Chat on WhatsApp"

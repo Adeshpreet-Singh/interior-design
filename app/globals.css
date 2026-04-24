@@ -514,13 +514,4 @@ section, .section { margin-bottom: 0; }
 .vt-lg { margin-top: 4rem; margin-bottom: 4rem; }
 .vt-xl { margin-top: 5rem; margin-bottom: 5rem; }
 
-/* DESIGN_SYSTEM_INJECTED */
-body {
-  background-color: #fdf2f8;
-  color: #2d0a1e;
-}
-.bg-primary { background-color: #be185d !important; }
-.bg-secondary { background-color: #db2777 !important; }
-.text-primary { color: #be185d !important; }
-.text-accent { color: #fbbf24 !important; }
-.bg-accent { background-color: #fbbf24 !important; }
+
